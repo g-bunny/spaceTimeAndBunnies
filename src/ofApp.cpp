@@ -1,6 +1,7 @@
 #include "ofApp.h"
 int height = 20;
 int width = 30;
+int insideLength = 15;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -17,6 +18,7 @@ void ofApp::setup(){
     this->timer = new Timer();
     this->brickChimney = new Item(2, 1050, 296);
     this->door = new Item(2,1030,540);
+    this->clock = new Item(3, 690,200);
     talk.loadSound("sounds/talk.wav");
     talk.setVolume(0.75f);
     talk.setMultiPlay(true);
@@ -54,13 +56,17 @@ void ofApp::draw(){
         door->drawClosed();
     }
     
-    
-    
+    ofSetColor(178,255,233);
+    clock->drawHours();
+    ofSetColor(255);
+    clock->drawMinutes();
+    ofSetColor(242,105,105);
+    clock->drawSeconds();
     timer->jumpedTime();
 //
 
-    cout << "movementSpeed " << one->movementSpeed << endl;
-    cout << "location.x " << one->location.x << endl;
+    cout << "mins " << clock->mins << endl;
+    cout << "hours " << clock->hours << endl;
     cout << "door open? " << door->interactionInitiated << endl;
 //    cout << "one is zero? " << one->isZero << endl;
 //    secondFrame->keyPressed();

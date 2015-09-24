@@ -6,6 +6,9 @@
 #include "Timer.h"
 #include "Item.h"
 #include "cubeItems.h"
+#define HOURLENGTH 4
+#define MINLENGTH 5
+#define SECLENGTH 6
 
 class ofApp : public ofBaseApp{
 
@@ -27,10 +30,14 @@ class ofApp : public ofBaseApp{
     Frame * secondFrame;
     Frame * thirdFrame;
     Frame * fourthFrame;
+    Frame * hourFrames[HOURLENGTH];
+    Frame * minFrames[MINLENGTH];
+    Frame * secFrames[SECLENGTH];
     Characters * one;
     Characters * zero;
     Timer * timer;
     ofSoundPlayer talk;
     Item * door;
     Item * brickChimney;
+    Item * clock;
 };

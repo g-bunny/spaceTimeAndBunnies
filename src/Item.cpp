@@ -30,3 +30,35 @@ void Item:: drawChimney(){
     chimney.draw(xPos, yPos, 158, 102);
     
 }
+
+void Item:: drawSeconds(){
+    
+    secs = ofGetSeconds();
+    ofPushMatrix();
+    ofTranslate(xPos, yPos);
+    rotationS = secs * 6 * movementFactorS;
+    ofRotate(rotationS);
+    ofLine(0, -140, 0, 0);
+    ofPopMatrix();
+}
+
+void Item:: drawMinutes(){
+    mins = ofGetMinutes();
+    ofPushMatrix();
+    ofTranslate(xPos, yPos);
+    rotationM = mins * 6 * movementFactorM;
+    ofRotate(rotationM);
+    ofLine(0, -120, 0, 0);
+    ofPopMatrix();
+    
+}
+void Item::drawHours(){
+    hours = ofGetHours();
+    ofPushMatrix();
+    ofTranslate(xPos, yPos);
+    rotationH = hours * 30 * movementFactorH;
+    ofRotate(rotationH);
+    ofLine(0, -100, 0, 0);
+    ofPopMatrix();
+    
+}
