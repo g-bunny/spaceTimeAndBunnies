@@ -10,17 +10,38 @@
 
 
 
-Frame::Frame(ofColor frameColor, int boxWidth, int boxHeight, int boxDepth, float marginX, float marginY){
-    this->frameColor = frameColor;
+Frame::Frame(ofColor frontColor, ofColor sideColor, ofColor topColor, int boxWidth, int boxHeight, int boxDepth, float marginX, float marginY, int perspectiveMode){
+    this->frontColor = frontColor;
+    this->sideColor = sideColor;
+    this->topColor = topColor;
     this->boxWidth = boxWidth;
     this->boxHeight = boxHeight;
     this->boxDepth = boxDepth;
     this->marginX = marginX;
     this->marginY = marginY;
-//    box = *new ofBoxPrimitive(boxWidth -1, boxHeight - 1, boxDepth-1, 1,1,1);
-    mesh = *new ofMesh();
-    mesh.setMode(OF_PRIMITIVE_LINE_STRIP);
-    mesh.enableColors();
+    this->perspectiveMode = perspectiveMode;
+    
+    speedOfRotation = 4.0;
+    faceFront = *new ofMesh();
+    faceBack = *new ofMesh();
+    faceTop = *new ofMesh();
+    faceLeft = *new ofMesh();
+    faceRight = *new ofMesh();
+    faceLeft = *new ofMesh();
+
+    linesFront = *new ofMesh();
+    linesBack = *new ofMesh();
+    linesTop = *new ofMesh();
+    linesLeft = *new ofMesh();
+    linesRight = *new ofMesh();
+    linesLeft = *new ofMesh();
+
+    linesFront.setMode(OF_PRIMITIVE_LINE_STRIP);
+    linesBack.setMode(OF_PRIMITIVE_LINE_STRIP);
+    linesLeft.setMode(OF_PRIMITIVE_LINE_STRIP);
+    linesRight.setMode(OF_PRIMITIVE_LINE_STRIP);
+    linesTop.setMode(OF_PRIMITIVE_LINE_STRIP);
+    linesBot.setMode(OF_PRIMITIVE_LINE_STRIP);
     
     ofVec3f frontTopLeft (-boxWidth/2,-boxHeight/2, boxDepth/2);
     ofVec3f frontTopRight (boxWidth/2,-boxHeight/2, boxDepth/2);
@@ -32,84 +53,107 @@ Frame::Frame(ofColor frameColor, int boxWidth, int boxHeight, int boxDepth, floa
     ofVec3f backTopLeft(- boxWidth/2, -boxHeight/2, -boxDepth/2);
     ofVec3f backTopRight(boxWidth/2, -boxHeight/2, -boxDepth/2);
     
-    mesh.addVertex(frontTopLeft);
-//    mesh.addColor(ofFloatColor(1.0, 0.0, 0.0));
-    mesh.addVertex(frontTopRight);
-//    mesh.addColor(ofFloatColor(0.0, 1.0, 0.0));
-    mesh.addVertex(frontBotRight);
-//    mesh.addColor(ofFloatColor(0.0, 1.0, 1.0));
-    mesh.addVertex(frontBotLeft);
-//    mesh.addColor(ofFloatColor(1.0, 1.0, 0.0));
-    mesh.addVertex(frontTopLeft);
-    mesh.addVertex(backTopLeft);
-    mesh.addVertex(backBotLeft);
-    mesh.addVertex(frontBotLeft);
-    mesh.addVertex(frontBotRight);
-    mesh.addVertex(backBotRight);
-    mesh.addVertex(backBotLeft);
-    mesh.addVertex(backTopLeft);
-    mesh.addVertex(backTopRight);
-    mesh.addVertex(backBotRight);
-    mesh.addVertex(backTopRight);
-    mesh.addVertex(frontTopRight);
+    //    mesh.addVertex(frontTopLeft);
+    //    mesh.addVertex(frontTopRight);
+    //    mesh.addVertex(frontBotRight);
+    //    mesh.addVertex(frontBotLeft);
+    //    mesh.addVertex(frontTopLeft);
+    //    mesh.addVertex(backTopLeft);
+    //    mesh.addVertex(backBotLeft);
+    //    mesh.addVertex(frontBotLeft);
+    //    mesh.addVertex(frontBotRight);
+    //    mesh.addVertex(backBotRight);
+    //    mesh.addVertex(backBotLeft);
+    //    mesh.addVertex(backTopLeft);
+    //    mesh.addVertex(backTopRight);
+    //    mesh.addVertex(backBotRight);
+    //    mesh.addVertex(backTopRight);
+    //    mesh.addVertex(frontTopRight);
     
-        triangle = *new ofMesh();
+    //front face
+    faceFront.addVertex(frontTopLeft);
+    faceFront.addVertex(frontBotLeft);
+    faceFront.addVertex(frontTopRight);
+    faceFront.addVertex(frontBotRight);
+    faceFront.addVertex(frontTopRight);
+    faceFront.addVertex(frontBotLeft);
     
-    triangle.addVertex(frontTopLeft);
-    triangle.addVertex(frontBotLeft);
-    triangle.addVertex(frontTopRight);
+    linesFront.addVertex(frontTopLeft);
+    linesFront.addVertex(frontTopRight);
+    linesFront.addVertex(frontBotRight);
+    linesFront.addVertex(frontBotLeft);
+    linesFront.addVertex(frontTopLeft);
+    //top face
+    faceTop.addVertex(frontTopLeft);
+    faceTop.addVertex(frontTopRight);
+    faceTop.addVertex(backTopRight);
+    faceTop.addVertex(frontTopLeft);
+    faceTop.addVertex(backTopLeft);
+    faceTop.addVertex(backTopRight);
     
-    triangle.addVertex(frontBotRight);
-    triangle.addVertex(frontTopRight);
-    triangle.addVertex(frontBotLeft);
+    linesTop.addVertex(frontTopLeft);
+    linesTop.addVertex(frontTopRight);
+    linesTop.addVertex(backTopRight);
+    linesTop.addVertex(backTopLeft);
+    linesTop.addVertex(frontTopLeft);
+    //bot face
+    faceBot.addVertex(frontBotLeft);
+    faceBot.addVertex(frontBotRight);
+    faceBot.addVertex(backBotRight);
+    faceBot.addVertex(frontBotLeft);
+    faceBot.addVertex(backBotLeft);
+    faceBot.addVertex(backBotRight);
     
-    triangle.addVertex(frontTopLeft);
-    triangle.addVertex(frontTopRight);
-    triangle.addVertex(backTopRight);
+    linesBot.addVertex(frontBotRight);
+    linesBot.addVertex(frontBotLeft);
+    linesBot.addVertex(backBotLeft);
+    linesBot.addVertex(backBotRight);
+    linesBot.addVertex(frontBotRight);
     
-    triangle.addVertex(frontTopLeft);
-    triangle.addVertex(backTopLeft);
-    triangle.addVertex(backTopRight);
+    //back face
+    faceBack.addVertex(backTopLeft);
+    faceBack.addVertex(backBotLeft);
+    faceBack.addVertex(backTopRight);
+    faceBack.addVertex(backBotRight);
+    faceBack.addVertex(backTopRight);
+    faceBack.addVertex(backBotLeft);
     
-    triangle.addVertex(frontBotLeft);
-    triangle.addVertex(frontBotRight);
-    triangle.addVertex(backBotRight);
-    
-    triangle.addVertex(frontBotLeft);
-    triangle.addVertex(backBotLeft);
-    triangle.addVertex(backBotRight);
-    
-    triangle.addVertex(backTopLeft);
-    triangle.addVertex(backBotLeft);
-    triangle.addVertex(backTopRight);
-    
-    triangle.addVertex(backBotRight);
-    triangle.addVertex(backTopRight);
-    triangle.addVertex(backBotLeft);
-    
-    triangle.addVertex(frontTopRight);
-    triangle.addVertex(frontBotRight);
-    triangle.addVertex(backBotRight);
-    
-    triangle.addVertex(frontTopRight);
-    triangle.addVertex(backTopRight);
-    triangle.addVertex(backBotRight);
-    
-    triangle.addVertex(frontTopLeft);
-    triangle.addVertex(frontBotLeft);
-    triangle.addVertex(backBotLeft);
-    
-    triangle.addVertex(frontTopLeft);
-    triangle.addVertex(backTopLeft);
-    triangle.addVertex(backBotLeft);
-    
-    speedOfRotation = 4.0;
+    linesBack.addVertex(backBotRight);
+    linesBack.addVertex(backBotLeft);
+    linesBack.addVertex(backTopLeft);
+    linesBack.addVertex(backTopRight);
+    linesBack.addVertex(backBotRight);
+    //right face
+    faceRight.addVertex(frontTopRight);
+    faceRight.addVertex(frontBotRight);
+    faceRight.addVertex(backBotRight);
+    faceRight.addVertex(frontTopRight);
+    faceRight.addVertex(backTopRight);
+    faceRight.addVertex(backBotRight);
+    linesRight.addVertex(backBotRight);
+    linesRight.addVertex(backTopRight);
+    linesRight.addVertex(frontTopRight);
+    linesRight.addVertex(frontBotRight);
+    linesRight.addVertex(backBotRight);
+    //left face
+    faceLeft.addVertex(frontTopLeft);
+    faceLeft.addVertex(frontBotLeft);
+    faceLeft.addVertex(backBotLeft);
+    faceLeft.addVertex(frontTopLeft);
+    faceLeft.addVertex(backTopLeft);
+    faceLeft.addVertex(backBotLeft);
+    linesLeft.addVertex(backBotLeft);
+    linesLeft.addVertex(backTopLeft);
+    linesLeft.addVertex(frontTopLeft);
+    linesLeft.addVertex(frontBotLeft);
+    linesLeft.addVertex(backBotLeft);
+
 }
 
-//void Frame::setup(){
-//    
-//    
-//}
+void Frame::display(){
+
+    
+}
 
 void Frame::draw(){
     ofPushMatrix();
@@ -119,43 +163,59 @@ void Frame::draw(){
     ofRotate(rotatex,1.0,0.0,0.0);
     ofRotate(rotatez,0.0,0.0,1.0);
 
-//    if (rotateRight){
-//        rotateDegreeY += 1;
-////        box.rotate(spinY, 0.0, 1.0, 0.0);
-//        if (rotateDegreeY > 88 && rotateDegreeY < 91){
-//            rotateDegreeY = 90;
-//        }
-//    }
-//    if (rotateLeft){
-//        rotateDegreeY -=1;
-//    }
-//    if (rotateUp){
-//        rotateDegreeX +=1;
-//
-//    }
-//    if (rotateDown){
-//        rotateDegreeX -=1;
-//    }
-//    
-//    //    box.rotate(spinX, 1.0, 0.0, 0.0);
-//    vector<ofMeshFace> triangles = box.getMesh().getUniqueFaces();
-    ofSetColor(0,0,0);
+    if (perspectiveMode == 1){
+        ofSetColor(frontColor);
+        faceBack.draw();
+        ofSetColor(0,0,0);
+        linesBack.draw();
+        
+        ofSetColor(topColor);
+        faceTop.draw();
+        ofSetColor(0,0,0);
+        linesTop.draw();
 
-    ofSetColor(frameColor);
-    triangle.draw();
-    ofSetColor(0,0,0);
-    mesh.draw();
+        ofSetColor(sideColor);
+        faceLeft.draw();
+        ofSetColor(0,0,0);
+        linesLeft.draw();
+        ofSetColor(sideColor);
+        faceRight.draw();
+        ofSetColor(0,0,0);
+        linesRight.draw();
+        
+        ofSetColor(topColor);
+        faceBot.draw();
+        ofSetColor(0,0,0);
+        linesBot.draw();
+        
+        ofSetColor(frontColor);
+        faceFront.draw();
+        ofSetColor(0,0,0);
+        linesFront.draw();
+    } else if (perspectiveMode == 2){
+        ofSetColor(frontColor);
+        faceBack.draw();
+        ofSetColor(topColor);
+        faceTop.draw();
+        ofSetColor(sideColor);
+        faceLeft.draw();
+        ofSetColor(sideColor);
+        faceRight.draw();
+        ofSetColor(topColor);
+        faceBot.draw();
+        ofSetColor(frontColor);
+        faceFront.draw();
+        
+        ofSetColor(0,0,0);
+        linesBack.draw();
+        linesTop.draw();
+        linesLeft.draw();
+        linesRight.draw();
+        linesBot.draw();
+        linesFront.draw();
+    }
 
-//    box.draw();
-//    box.drawWireframe();
-//    ofRotate(rotateDegreeY,0.0,1.0,0.0);
-//    ofRotate(rotateDegreeX,1.0,0.0,0.0);
-//    ofRotate(rotateDegreeZ,0.0,0.0,1.0);
-    ofSetColor(0);
     ofPopMatrix();
-//
-//    keyPressed();
-//    keyReleased();
     rotateMe();
 }
 

@@ -10,10 +10,12 @@
 
 class Frame{
 public:
-    Frame(ofColor frameColor, int boxWidth, int boxHeight, int boxDepth, float marginX, float marginY);
+    Frame(ofColor frontColor, ofColor sideColor, ofColor topColor, int boxWidth, int boxHeight, int boxDepth, float marginX, float marginY, int perspectiveMode);
     void draw();
     void lines();
+    void display();
     void rotateMe();
+    void proceduralRotation();
     ofBoxPrimitive box;
     ofVboMesh boxSides[ofBoxPrimitive::SIDES_TOTAL];
 //    ofVboMesh deformPlane;
@@ -28,7 +30,9 @@ public:
     
     float xStartRatio;
     float yStartRatio;
-    ofColor frameColor;
+    ofColor sideColor;
+    ofColor topColor;
+    ofColor frontColor;
     bool flipUp = false;
     bool flipDown = false;
     bool flipRight = false;
@@ -36,8 +40,20 @@ public:
     
     bool currentFrame;
     
-    ofMesh mesh;
-    ofMesh triangle;
+    ofMesh linesFront;
+    ofMesh linesBack;
+    ofMesh linesLeft;
+    ofMesh linesRight;
+    ofMesh linesTop;
+    ofMesh linesBot;
+    
+    ofMesh faceFront;
+    ofMesh faceBack;
+    ofMesh faceLeft;
+    ofMesh faceRight;
+    ofMesh faceTop;
+    ofMesh faceBot;
+    
     float rotateDegreeX = 0.0;
     float rotateDegreeY = 0.0;
     float rotateDegreeZ = 0.0;
@@ -50,4 +66,5 @@ public:
     float rotatez = 0.0;
     
     float speedOfRotation;
+    int perspectiveMode;
 };

@@ -4,6 +4,8 @@
 #include "Frame.hpp"
 #include "Characters.hpp"
 #include "Timer.h"
+#include "Item.h"
+#include "cubeItems.h"
 
 class ofApp : public ofBaseApp{
 
@@ -28,4 +30,7 @@ class ofApp : public ofBaseApp{
     Characters * one;
     Characters * zero;
     Timer * timer;
+    ofSoundPlayer talk;
+    Item * door;
+    Item * brickChimney;
 };

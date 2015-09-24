@@ -27,7 +27,7 @@ public:
     float displacementY = 0;
     float displacementZ = 0;
     
-    float movementSpeed = 4;
+    float movementSpeed = 0;
     bool lastMovedRight = false;
     bool lastMovedLeft = false;
     bool afterJump = false;
@@ -37,8 +37,8 @@ public:
     ofVec3f velocity;
     ofVec3f acceleration;
     
-    float characterWidth = 50.0;
-    float characterHeight = 100.0;
+    float characterWidth = 75.0;
+    float characterHeight = 150.0;
     
     float startingXpos = smallNumber + characterWidth/2;
     float startingYpos = bigNumber - characterHeight/2;

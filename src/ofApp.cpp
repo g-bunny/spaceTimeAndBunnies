@@ -8,62 +8,61 @@ void ofApp::setup(){
     const ofColor blue = ofColor(178,255,233);
     const ofColor red = ofColor(242,105,105);
 
-    this->firstFrame = new Frame(lavender, 300, 300, 100, 275, 250);
-    this->secondFrame = new Frame(blue, 300, 300, 100, 687.5,250);
-    this->thirdFrame = new Frame(red, 300, 300, 100, 1100, 250);
-    this->fourthFrame = new Frame(lavender, 1125, 300, 100, 687.5, 625);
-    this->one = new Characters(500,478,0,1);
-    this->zero = new Characters(350,478,0,2);
+    this->firstFrame = new Frame(lavender, blue, blue, 300, 300, 100, 275, 250, 1);
+    this->secondFrame = new Frame(lavender, lavender, blue, 300, 300, 300, 687.5,250, 1);
+    this->thirdFrame = new Frame(lavender, blue, red, 300, 300, 100, 1100, 250, 1);
+    this->fourthFrame = new Frame(lavender, red, red, 1125, 300, 100, 687.5, 625, 2);
+    this->one = new Characters(200,248,0,1);
+    this->zero = new Characters(1070,540,0,2);
     this->timer = new Timer();
-    
+    this->brickChimney = new Item(2, 1050, 296);
+    this->door = new Item(2,1030,540);
+    talk.loadSound("sounds/talk.wav");
+    talk.setVolume(0.75f);
+    talk.setMultiPlay(true);
     ofBackground(255);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     ofCamera();
-//    for (int y = 0; y < height; y++){
-//        for(int x = 0; x < width; x++){
-//            mesh.addVertex(ofPoint(x,y,0));
-//            mesh.addColor(ofFloatColor(0,0,0));
-//        }
-//    }
-//    
-//    for (int y = 0; y < height - 1; y++){
-//        for (int x = 0; x < width -1 ; x++){
-//            mesh.addIndex(x+y*width);
-//            mesh.addIndex((x+1)+y*width);
-//            mesh.addIndex(x+(y+1)*width);
-//            mesh.addIndex((x+1)+y*width);
-//            mesh.addIndex((x+1)+(y+1)*width);
-//   \\\\\\\ex(x+(y+1)*width);
-//        }
-//    }
-
+    ofSoundUpdate();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    firstFrame->display();
+    secondFrame->display();
+    thirdFrame->display();
+    fourthFrame->display();
+    
     firstFrame->draw();
     secondFrame->draw();
     thirdFrame->draw();
     fourthFrame->draw();
 //    secondFrame->lines();
 //    zero->display();
+    if (door->interactionInitiated == true){
+        door->drawOpen();
+    }
     one->display();
     zero->display();
     one->move();
     zero->move();
+    brickChimney->drawChimney();
+    if (door->interactionInitiated == false){
+        door->drawClosed();
+    }
+    
+    
     
     timer->jumpedTime();
-    cout << "one is Player? " << one->isPlayer << endl;
-    cout << "one is AI? " << one->isAI << endl;
-    cout << "one is one? " << one->isOne << endl;
-    cout << "one is zero? " << one->isZero << endl;
-    cout << "zero is Player? " << zero->isPlayer << endl;
-    cout << "zero is AI? " << zero->isAI << endl;
-    cout << "zero is one? " << zero->isOne << endl;
-    cout << "zero is zero? " << zero->isZero << endl;
+//
+
+    cout << "movementSpeed " << one->movementSpeed << endl;
+    cout << "location.x " << one->location.x << endl;
+    cout << "door open? " << door->interactionInitiated << endl;
+//    cout << "one is zero? " << one->isZero << endl;
 //    secondFrame->keyPressed();
 //    secondFrame->keyReleased();
     
@@ -90,16 +89,52 @@ void ofApp::keyPressed(int key){
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
     if (key == 'd'){
-        firstFrame->flipRight = true;
+        if (one->location.x > 100 && one->location.x<400){
+            firstFrame->flipRight = true;
+        } else if (one->location.x > 500 && one->location.x< 800){
+            secondFrame->flipRight = true;
+        } else if (one->location.x > 900 && one->location.x < 1200){
+            thirdFrame->flipRight = true;
+        }
     }
     if (key == 'a'){
-        firstFrame->flipLeft = true;
+        if (one->location.x > 100 && one->location.x<400){
+            firstFrame->flipLeft = true;
+        } else if (one->location.x > 500 && one->location.x< 800){
+            secondFrame->flipLeft = true;
+        } else if (one->location.x > 900 && one->location.x < 1200){
+            thirdFrame->flipLeft = true;
+        }
     }
     if (key == 'w'){
-        firstFrame->flipUp = true;
+        if (one->location.x > 100 && one->location.x<400){
+            firstFrame->flipUp = true;
+        } else if (one->location.x > 500 && one->location.x< 800){
+            secondFrame->flipUp = true;
+        } else if (one->location.x > 900 && one->location.x < 1200){
+            thirdFrame->flipUp = true;
+        }
     }
     if (key == 's'){
-        firstFrame->flipDown = true;
+        if (one->location.x > 100 && one->location.x<400){
+            firstFrame->flipDown = true;
+        } else if (one->location.x > 500 && one->location.x< 800){
+            secondFrame->flipDown = true;
+        } else if (one->location.x > 900 && one->location.x < 1200){
+            thirdFrame->flipDown = true;
+        }
+    }
+    if (key == OF_KEY_RIGHT){
+        one->moveRight = false;
+    }
+    if (key == OF_KEY_LEFT){
+        one->moveLeft = false;
+    }
+    if (key == OF_KEY_UP){
+        one->moveUp = false;
+    }
+    if (key == OF_KEY_DOWN){
+        one->moveDown = false;
     }
 }
 
@@ -111,6 +146,13 @@ void ofApp::mouseDragged(int x, int y, int button){
 }
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
+    if (x < ofGetWindowWidth()/2){
+        talk.play();
+//        talk.setSpeed(0.1f)
+    }
+    if (x > ofGetWindowWidth()/2 && x < ofGetWindowWidth()){
+        door->interactionInitiated = true;
+    }
 }
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){

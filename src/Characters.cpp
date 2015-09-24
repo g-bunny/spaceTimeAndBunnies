@@ -70,18 +70,22 @@ Characters::Characters(float x, float y, float z, int characterMode){
 
 void Characters::display(){
     ofSetColor(255,255,255);
-    ofPushMatrix();
+//    ofPushMatrix();
     if (ofGetFrameNum() % 7 == 0){
         imageIndex = (imageIndex + 1) % MAXIMAGES;
+        location.x += movementSpeed;
+
     }
-    ofTranslate(ofGetWidth()/2 + displacementX, ofGetHeight()/2 + displacementY, startingZpos + displacementZ);
-    
-    
-    ofPopMatrix();
+//    ofTranslate(ofGetWidth()/2 + displacementX, ofGetHeight()/2 + displacementY, startingZpos + displacementZ);
+//
+//    ofTranslate(ofGetWidth()/2 + location.x + displacementX ,ofGetHeight()/2 +  location.y + displacementY);
+//        ofPopMatrix();
+
     
     if (isPlayer == true){
         ///////////////////right
         if (moveRight == true){
+            movementSpeed = 4;
             if (justJumped == false) {
                 walk[imageIndex].draw(location.x, location.y, characterWidth, characterHeight);
                 lastMovedRight = true;
@@ -100,22 +104,22 @@ void Characters::display(){
         }
         /////////////////////left
         if (moveLeft == true) {
-    //        rotateX(angle);
-            ofScale(-1, 1);
-            // translate();
-            walk[imageIndex].draw(-location.x, location.y, characterWidth, characterHeight);
+            movementSpeed = -4;
+//            ofScale(-1, 1);
+            walk[imageIndex].mirror(false, true);
+            walk[imageIndex].draw(location.x, location.y, characterWidth, characterHeight);
             lastMovedRight = false;
             lastMovedLeft = true;
         }
 
         /////////////////////standing still facing right
         if (moveRight == false && moveLeft == false && moveUp == false && moveDown == false && justJumped == false && lastMovedRight == true) {
-    //        rotateX(angle);
+            movementSpeed = 0;
             walk[0].draw(location.x, location.y, characterWidth, characterHeight);
         }
         /////////////////////standing still start
         if (moveRight == false && moveLeft == false && moveUp == false && moveDown == false && lastMovedRight == false && lastMovedLeft == false) {
-    //        rotateX(angle);
+            movementSpeed = 0;
             walk[0].draw(location.x, location.y, characterWidth, characterHeight);
         }
     }
@@ -131,6 +135,7 @@ void Characters::display(){
             zeroWalk[0].draw(location.x, location.y, characterWidth, characterHeight);
         }
     }
+
 }
 
 void Characters::move(){
