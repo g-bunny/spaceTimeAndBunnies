@@ -15,7 +15,7 @@ public:
     void lines();
     void display();
     void rotateMe();
-    void proceduralRotation();
+    void proceduralRotation(int i);
     ofBoxPrimitive box;
     ofVboMesh boxSides[ofBoxPrimitive::SIDES_TOTAL];
 //    ofVboMesh deformPlane;

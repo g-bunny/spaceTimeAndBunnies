@@ -361,3 +361,22 @@ void Frame::rotateMe(){
         }
     }
 }
+
+void Frame::proceduralRotation(int i){
+    if (perspectiveMode == 3){
+        if (i % 6 == 0){
+            rotatez +=PI/16;
+        } else if (i % 6 == 1){
+            rotatex -= PI/16;
+        } else if (i % 6 == 2){
+            rotatey += PI/16;
+        } else if (i % 6 == 3){
+            rotatez -= PI/16;
+        } else if (i % 6 == 4){
+            rotatey -=PI/30;
+        } else {
+            rotatex += PI/30;
+        }
+
+    }
+}
