@@ -7,6 +7,7 @@
 //
 
 #include "ofMain.h"
+#include "Timer.h"
 
 class Characters{
 public:
@@ -57,5 +58,13 @@ public:
     bool isAI = false;
     
     int characterMode;
+    
+    float currentYpos = startingYpos;
+    
+    ofVec3f normalGravity;
+    float jumpForce = -10;
+    
+    Timer * timer;
+    
     // 0 = isZero & isPlayer, 1 = isOne & isPlayer, 2 = isZero & isAI, 3 = isOne & isAI
 };

@@ -8,13 +8,12 @@
 //
 
 #include "Timer.h"
-#include "Characters.hpp"
 
 Timer::Timer(){
     
 }
 
-void Timer::update(){
+void Timer::setup(){
     initialTime = ofGetElapsedTimef();
 }
 

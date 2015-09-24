@@ -14,7 +14,7 @@ void ofApp::setup(){
     this->thirdFrame = new Frame(lavender, blue, red, 300, 300, 100, 1100, 250, 1);
     this->fourthFrame = new Frame(lavender, red, red, 1125, 300, 100, 687.5, 625, 2);
     this->one = new Characters(200,248,0,1);
-    this->zero = new Characters(1070,540,0,2);
+    this->zero = new Characters(1070,560,0,2);
     this->timer = new Timer();
     this->brickChimney = new Item(2, 1050, 296);
     this->door = new Item(2,1030,540);
@@ -50,6 +50,7 @@ void ofApp::draw(){
     one->display();
     zero->display();
     one->move();
+    one->jump();
     zero->move();
     brickChimney->drawChimney();
     if (door->interactionInitiated == false){
@@ -62,12 +63,19 @@ void ofApp::draw(){
     clock->drawMinutes();
     ofSetColor(242,105,105);
     clock->drawSeconds();
-    timer->jumpedTime();
+    
+    if (one->moveRight == true){
+        clock->movementFactorS += .5;
+
+    } else {
+//        clock->movementFactorS = 0;
+
+    }
 //
 
     cout << "mins " << clock->mins << endl;
     cout << "hours " << clock->hours << endl;
-    cout << "door open? " << door->interactionInitiated << endl;
+    cout << "location.y? " << one->location.y << endl;
 //    cout << "one is zero? " << one->isZero << endl;
 //    secondFrame->keyPressed();
 //    secondFrame->keyReleased();
@@ -88,6 +96,9 @@ void ofApp::keyPressed(int key){
     }
     if (key == OF_KEY_DOWN){
         one->moveDown = true;
+    }
+    if (key == OF_KEY_LEFT_SHIFT){
+        one->jumped = true;
     }
 
 }

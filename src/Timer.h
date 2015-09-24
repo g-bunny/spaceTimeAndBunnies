@@ -11,7 +11,7 @@
 class Timer {
 public:
     Timer();
-    void update();
+    void setup();
     void jumpedTime();
     void reset();
     

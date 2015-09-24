@@ -3,7 +3,7 @@
 #include "ofMain.h"
 #include "Frame.hpp"
 #include "Characters.hpp"
-#include "Timer.h"
+//#include "Timer.h"
 #include "Item.h"
 #include "cubeItems.h"
 #define HOURLENGTH 4
