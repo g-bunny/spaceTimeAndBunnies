@@ -85,7 +85,7 @@ void Characters::display(){
     if (isPlayer == true){
         ///////////////////right
         if (moveRight == true){
-            movementSpeed = 4;
+            movementSpeed = 6;
             if (justJumped == false) {
                 walk[imageIndex].draw(location.x, location.y, characterWidth, characterHeight);
                 lastMovedRight = true;
@@ -104,7 +104,7 @@ void Characters::display(){
         }
         /////////////////////left
         if (moveLeft == true) {
-            movementSpeed = -4;
+            movementSpeed = -6;
 //            ofScale(-1, 1);
             walk[imageIndex].mirror(false, true);
             walk[imageIndex].draw(location.x, location.y, characterWidth, characterHeight);
