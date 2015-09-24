@@ -33,7 +33,7 @@ public:
     
     float movementFactorH = 1.0;
     float movementFactorM = 1.0;
-    float movementFactorS = 1.0;
+    float movementFactorS = 0.0;
     
     ofImage doorOpen;
     ofImage doorClosed;

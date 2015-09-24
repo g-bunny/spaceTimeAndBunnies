@@ -36,7 +36,8 @@ void Item:: drawSeconds(){
     secs = ofGetSeconds();
     ofPushMatrix();
     ofTranslate(xPos, yPos);
-    rotationS = secs * 6 * movementFactorS;
+    rotationS = secs * 6;
+    rotationS += movementFactorS;
     ofRotate(rotationS);
     ofLine(0, -140, 0, 0);
     ofPopMatrix();
