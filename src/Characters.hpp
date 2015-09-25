@@ -51,18 +51,22 @@ public:
     bool moveDown = false;
     
     ofImage jumpingBunny;
+    ofImage jumpingBunnyLeft;
+    
     
     bool isOne = false;
     bool isZero = false;
     bool isPlayer = false;
     bool isAI = false;
     
+    bool transported = false;
+    
     int characterMode;
     
     float currentYpos = startingYpos;
     
     ofVec3f normalGravity;
-    float jumpForce = -10;
+    float jumpForce = -11;
     
     Timer * timer;
     
