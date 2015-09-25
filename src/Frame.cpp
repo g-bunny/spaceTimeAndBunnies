@@ -213,6 +213,35 @@ void Frame::draw(){
         linesRight.draw();
         linesBot.draw();
         linesFront.draw();
+    } else if (perspectiveMode == 3){
+            ofSetColor(frontColor);
+            faceBack.draw();
+            ofSetColor(0,0,0);
+            linesBack.draw();
+        
+            ofSetColor(topColor);
+            faceTop.draw();
+            ofSetColor(0,0,0);
+            linesTop.draw();
+            
+//            ofSetColor(sideColor);
+//            faceLeft.draw();
+//            ofSetColor(0,0,0);
+//            linesLeft.draw();
+//            ofSetColor(sideColor);
+//            faceRight.draw();
+//            ofSetColor(0,0,0);
+//            linesRight.draw();
+        
+            ofSetColor(topColor);
+            faceBot.draw();
+            ofSetColor(0,0,0);
+            linesBot.draw();
+            
+            ofSetColor(frontColor);
+            faceFront.draw();
+            ofSetColor(0,0,0);
+            linesFront.draw();
     }
 
     ofPopMatrix();
