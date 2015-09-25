@@ -37,7 +37,19 @@ class ofApp : public ofBaseApp{
     Characters * zero;
     Timer * timer;
     ofSoundPlayer talk;
+    ofSoundPlayer knock;
+    ofSoundPlayer chimes;
     Item * door;
     Item * brickChimney;
     Item * clock;
+    
+    float hourIncrement = 0.5;
+    float minIncrement = 1;
+    float secIncrement = 6;
+    
+    bool downTheChimney = false;
+    bool appropriateDist = false;
+    
+    bool showZero = false;
+
 };
