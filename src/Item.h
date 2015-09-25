@@ -31,8 +31,8 @@ public:
     float rotationM;
     float rotationS;
     
-    float movementFactorH = 1.0;
-    float movementFactorM = 1.0;
+    float movementFactorH = 0.0;
+    float movementFactorM = 0.0;
     float movementFactorS = 0.0;
     
     ofImage doorOpen;
@@ -40,5 +40,7 @@ public:
     
     ofImage chimney;
 
+    float shake;
     bool interactionInitiated = false;
+    bool doorTime = false;
 };

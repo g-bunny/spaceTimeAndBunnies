@@ -22,11 +22,19 @@ void Item:: drawOpen(){
 }
 
 void Item:: drawClosed(){
-    doorClosed.draw(xPos, yPos, 144, 210);
+    ofSetColor(255,255,255,255);
+    shake = ofRandom(-2, 2);
+    if (doorTime == false){
+        doorClosed.draw(xPos, yPos, 144, 210);
+    }
+    if (doorTime == true){
+        doorClosed.draw(xPos + shake, yPos + shake, 144, 210);
+    }
 
 }
 
 void Item:: drawChimney(){
+    ofSetColor(255,255,255,255);
     chimney.draw(xPos, yPos, 158, 102);
     
 }
@@ -47,7 +55,8 @@ void Item:: drawMinutes(){
     mins = ofGetMinutes();
     ofPushMatrix();
     ofTranslate(xPos, yPos);
-    rotationM = mins * 6 * movementFactorM;
+    rotationM = mins * 6;
+    rotationM += movementFactorM;
     ofRotate(rotationM);
     ofLine(0, -120, 0, 0);
     ofPopMatrix();
@@ -57,7 +66,8 @@ void Item::drawHours(){
     hours = ofGetHours();
     ofPushMatrix();
     ofTranslate(xPos, yPos);
-    rotationH = hours * 30 * movementFactorH;
+    rotationH = hours * 30;
+    rotationH += movementFactorH;
     ofRotate(rotationH);
     ofLine(0, -100, 0, 0);
     ofPopMatrix();
