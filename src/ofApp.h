@@ -10,8 +10,8 @@ class ofApp : public ofBaseApp{
 		void update();
         void draw();
     
-    Chapter7 * chapter7;
-    Chapter7 * chapter1;
+    Chapter * chapter7;
+    Chapter * chapter1;
 //
 		void keyPressed(int key);
 		void keyReleased(int key);

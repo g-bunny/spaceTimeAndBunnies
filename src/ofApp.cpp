@@ -3,8 +3,8 @@
 
 void ofApp::setup(){
 //    this->chapter1 = new Chapter1();
-    this->chapter7 = new Chapter7(4, 300);
-    this->chapter1 = new Chapter7(1, 500);
+    this->chapter7 = new Chapter(4, 300, 300, 100, 275, 250, "chimney", "door");
+    this->chapter1 = new Chapter(1, 500, 500, 500, 600, 400, "sign", "door");
 }
 
 //--------------------------------------------------------------
