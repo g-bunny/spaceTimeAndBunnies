@@ -81,7 +81,7 @@ Characters::Characters(float x, float y, float z, int characterMode){
         zeroWalk[7].loadImage("zeroBunnySprite7.png");
         zeroWalk[imageIndex].mirror(false, true);
 
-        jumpingBunny.loadImage("zeroJumpingBunny.png");
+//        jumpingBunny.loadImage("zeroJumpingBunny.png");
     }
 
 }
