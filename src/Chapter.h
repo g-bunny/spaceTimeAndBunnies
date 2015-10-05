@@ -38,6 +38,8 @@ public:
     Item * door;
     Item * brickChimney;
     Item * clock;
+    Item * homeSign;
+    Item * groundSign;
     
     float hourIncrement = 0.5;
     float minIncrement = 1;
@@ -57,5 +59,10 @@ public:
     int chapNum = 0;
     string objectsPlaced1;
     string objectsPlaced2;
+    
+    ofTrueTypeFont arcadeFont;
+    ofTrueTypeFont visitorFont;
+    ofTrueTypeFont superScriptFont;
+    ofTrueTypeFont handyFont;
 
 };

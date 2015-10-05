@@ -9,12 +9,14 @@ class ofApp : public ofBaseApp{
 		void setup();
 		void update();
         void draw();
-    
-    Chapter * chapter7;
+        void keyPressed(int key);
+        void keyReleased(int key);
+
     Chapter * chapter1;
-//
-		void keyPressed(int key);
-		void keyReleased(int key);
+    Chapter * chapter2;
+    Chapter * chapter3;
+    Chapter * chapter7;
+		
     int currentChapter = 1;
     
     int widthThirds = 300;
@@ -29,9 +31,5 @@ class ofApp : public ofBaseApp{
 //		void windowResized(int w, int h);
 //		void dragEvent(ofDragInfo dragInfo);
 //		void gotMessage(ofMessage msg);
-    
-    ofTrueTypeFont arcadeFont;
-    ofTrueTypeFont visitorFont;
-    ofTrueTypeFont superScriptFont;
-    ofTrueTypeFont handyFont;
+
 };

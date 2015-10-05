@@ -11,11 +11,11 @@
 int height = 20;
 int width = 30;
 int insideLength = 15;
+const ofColor lavender = ofColor(176,183,255);
+const ofColor blue = ofColor(178,255,233);
+const ofColor red = ofColor(242,105,105);
 
 Chapter::Chapter(int chapNum, int numOfFrames, int frameWidth, int frameHeight, int frameDepth, float marginX, float marginY, string objectsPlaced1, string objectsPlaced2){
-    const ofColor lavender = ofColor(176,183,255);
-    const ofColor blue = ofColor(178,255,233);
-    const ofColor red = ofColor(242,105,105);
     this->frameWidth = frameWidth;
     this->numOfFrames = numOfFrames;
     this->frameHeight = frameHeight;
@@ -42,6 +42,8 @@ Chapter::Chapter(int chapNum, int numOfFrames, int frameWidth, int frameHeight, 
     this->brickChimney = new Item(2, 1050, 296);
     this->door = new Item(2,1030,540);
     this->clock = new Item(3, 690,200);
+    this->homeSign = new Item(2,825,400);
+
     //    talk.loadSound("sounds/chimes.wav");
     knock.loadSound("sounds/knock.wav");
     chimes.loadSound("sounds/chimes.wav");
@@ -51,6 +53,12 @@ Chapter::Chapter(int chapNum, int numOfFrames, int frameWidth, int frameHeight, 
     //    talk.setMultiPlay(true);
     knock.setMultiPlay(false);
     chimes.setMultiPlay(false);
+    
+    arcadeFont.loadFont("fonts/arcade/ARCADE.TTF", 30);
+    arcadeFont.setLineHeight(20.0f);
+    arcadeFont.setLetterSpacing(1.0);
+
+    
     ofBackground(255);
 }
 
@@ -81,6 +89,26 @@ void Chapter::draw(){
     one->display();
     one->move();
     one->jump();
+    if (chapNum == 1){
+        firstFrame->perspectiveMode = 2;
+        firstFrame->sideColor = lavender;
+        firstFrame->topColor = lavender;
+        homeSign->drawHangingSign();
+        arcadeFont.drawString("Home \nSweet \nHome", 850, 500);
+        
+        if (one->location.x > 100 && one->location.x < 1000){
+            activeFrame = 1;
+        } else {
+            activeFrame = 0;
+        }
+    }
+    
+    if (chapNum == 3){
+        firstFrame->frontColor = blue;
+        firstFrame->sideColor = blue;
+        firstFrame->topColor = red;
+        
+    }
     if (chapNum == 7){
         if (door->interactionInitiated == true){
             door->drawOpen();
@@ -134,21 +162,17 @@ void Chapter::draw(){
             ofSetColor(242,105,105);
             clock->drawSeconds();
         }
-        
         if (one->location.x > 1030 && one->location.x < 1130 && one->location.y <215 && one->location.y > 190){
             downTheChimney = true;
         }
-        
         if(downTheChimney == true){
             one->transported = true;
         }
-        
         if(one->location.x >= 1010 && one->location.x <= 1150 && one->location.y == 625){
             appropriateDist = true;
         } else {
             appropriateDist = false;
         }
-        
         if(int(clock->rotationS)%360 < 15 && int(clock->rotationS)%360 > 0){
             if (door->interactionInitiated == false){
                 door->doorTime = true;

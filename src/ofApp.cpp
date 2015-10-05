@@ -5,23 +5,28 @@ void ofApp::setup(){
 //    this->chapter1 = new Chapter1();
     this->chapter7 = new Chapter(7, 4, 300, 300, 100, 275, 250, "chimney", "door");
     this->chapter1 = new Chapter(1, 1, 850, 500, 500, 692.5, 425, "sign", "door");
+    this->chapter2 = new Chapter(2, 2, 850, 500, 500, 692.5, 425, "sign", "door");
+    this->chapter3 = new Chapter(3, 1, 400, 500, 500, 692.5, 425, "sign", "door");
     
     ofTrueTypeFont::setGlobalDpi(72);
     
-    arcadeFont.loadFont("fonts/arcade/ARCADE.TTF", 30);
-    arcadeFont.setLineHeight(20.0f);
-    arcadeFont.setLetterSpacing(1.0);
     chapter7->chapNum = 7;
     chapter1->chapNum = 1;
+    chapter2->chapNum = 2;
+    chapter3->chapNum = 3;
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    if (currentChapter == 2){
-        chapter7->update();
-    } else if (currentChapter == 1){
+    if (currentChapter == 1){
         chapter1->update();
+    } else if(currentChapter == 2){
+        chapter2->update();
+    } else if (currentChapter == 3){
+        chapter3->update();
+    } else if (currentChapter == 7){
+        chapter7->update();
     }
 }
 
@@ -29,14 +34,17 @@ void ofApp::update(){
 void ofApp::draw(){
     
     
-    if (currentChapter == 2){
-        chapter7->draw();
-    } else if (currentChapter == 1){
+    if (currentChapter == 1){
         chapter1->draw();
+    } else if(currentChapter == 2){
+        chapter2->draw();
+    } else if (currentChapter == 3){
+        chapter3->draw();
+    } else if (currentChapter == 7){
+        chapter7->draw();
     }
     ofSetColor(0);
 
-    arcadeFont.drawString("Home \nSweet \nHome", 100, 100);
     cout << chapter7->chapNum << endl;
 }
 
