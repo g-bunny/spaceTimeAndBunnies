@@ -14,6 +14,9 @@ Item:: Item(int itemType, int xPos, int yPos){
     doorOpen.loadImage("doorOpen.png");
     doorClosed.loadImage("doorClosed.png");
     chimney.loadImage("brickChimney.png");
+    hangingSign.loadImage("hangingSign.png");
+    groundedSign.loadImage("groundedSignWithout.png");
+    groundedSign2.loadImage("groundedSignWithDrawing.png");
 }
 
 void Item:: drawOpen(){
@@ -71,5 +74,19 @@ void Item::drawHours(){
     ofRotate(rotationH);
     ofLine(0, -100, 0, 0);
     ofPopMatrix();
-    
+}
+
+void Item::drawHangingSign(){
+    ofSetColor(255,255,255,255);
+    hangingSign.draw(xPos, yPos, 151.2, 150);
+}
+
+void Item::drawGroundedSign(){
+    ofSetColor(255,255,255,255);
+    groundedSign.draw(xPos, yPos, 150, 150);
+}
+
+void Item::drawGroundedSign2(){
+    ofSetColor(255,255,255,255);
+    groundedSign.draw(xPos, yPos, 150, 150);
 }

@@ -17,6 +17,9 @@ public:
     void drawSeconds();
     void drawMinutes();
     void drawHours();
+    void drawHangingSign();
+    void drawGroundedSign();
+    void drawGroundedSign2();
     
     //0 - cube type; 1 - collectible type; 2 - interaction type; 3 - noCollider type; 4 - collider type
     int itemType;
@@ -39,7 +42,9 @@ public:
     ofImage doorClosed;
     
     ofImage chimney;
-
+    ofImage hangingSign;
+    ofImage groundedSign;
+    ofImage groundedSign2;
     float shake;
     bool interactionInitiated = false;
     bool doorTime = false;
