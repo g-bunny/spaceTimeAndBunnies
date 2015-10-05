@@ -340,7 +340,7 @@ void Frame::rotateMe(){
         }
         else if(yRotateState == 2){
             rotatey += speedOfRotation;
-            if (rotatey >= 90){
+            if (rotatey >= -90){
                 rotatey = -90;
                 flipLeft = false;
                 yRotateState = 1;
