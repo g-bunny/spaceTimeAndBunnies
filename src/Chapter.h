@@ -16,7 +16,7 @@
 
 class Chapter{
 public:
-    Chapter(int numOfFrames, int frameWidth, int frameHeight, int frameDepth, int marginX, int marginY, string objectsPlaced1, string objectsPlaced2);
+    Chapter(int chapNum, int numOfFrames, int frameWidth, int frameHeight, int frameDepth, float marginX, float marginY, string objectsPlaced1, string objectsPlaced2);
     void update();
     void draw();
     
@@ -52,8 +52,9 @@ public:
     int frameWidth;
     int frameHeight;
     int frameDepth;
-    int marginX;
-    int marginY;
+    float marginX;
+    float marginY;
+    int chapNum = 0;
     string objectsPlaced1;
     string objectsPlaced2;
 

@@ -12,7 +12,7 @@ int height = 20;
 int width = 30;
 int insideLength = 15;
 
-Chapter::Chapter(int numOfFrames, int frameWidth, int frameHeight, int frameDepth, int marginX, int marginY, string objectsPlaced1, string objectsPlaced2){
+Chapter::Chapter(int chapNum, int numOfFrames, int frameWidth, int frameHeight, int frameDepth, float marginX, float marginY, string objectsPlaced1, string objectsPlaced2){
     const ofColor lavender = ofColor(176,183,255);
     const ofColor blue = ofColor(178,255,233);
     const ofColor red = ofColor(242,105,105);
@@ -78,107 +78,103 @@ void Chapter::draw(){
         fourthFrame->display();
         fourthFrame->draw();
     }
-
-    if (door->interactionInitiated == true){
-        door->drawOpen();
-    }
-    //    if (int(clock->rotationS)%360 < 15 && int(clock->rotationS)%360 > 0 && door->doorTime == true){
-    //        if (int(clock->rotationM)%360 < 15 && int(clock->rotationM)%360 > 0 && door->doorTime == true){
-    //            if (int(clock->rotationH)%360 < 15 && int(clock->rotationH)%360 > 0 && door->doorTime == true){
-    //                if(door->interactionInitiated){
-    //                                showZero = true;
-    //                }
-    //            }
-    //        }
-    //    }
-    //////TOGGLE FOR EASY MODE
-    if (int(clock->rotationS)%360 < 15 && int(clock->rotationS)%360 > 0 && door->doorTime == true){
-        showZero = true;
-    }
-    
-    
-    if(showZero == true){
-        zero->display();
-        zero->move();
-        chimes.play();
-        
-    }
-    
-    brickChimney->drawChimney();
-    if (door->interactionInitiated == false){
-        door->drawClosed();
-    }
     one->display();
     one->move();
     one->jump();
-    
-    if (one->moveRight == true){
-        clock->movementFactorS += .5;
+    if (chapNum == 7){
+        if (door->interactionInitiated == true){
+            door->drawOpen();
+        }
+        //    if (int(clock->rotationS)%360 < 15 && int(clock->rotationS)%360 > 0 && door->doorTime == true){
+        //        if (int(clock->rotationM)%360 < 15 && int(clock->rotationM)%360 > 0 && door->doorTime == true){
+        //            if (int(clock->rotationH)%360 < 15 && int(clock->rotationH)%360 > 0 && door->doorTime == true){
+        //                if(door->interactionInitiated){
+        //                                showZero = true;
+        //                }
+        //            }
+        //        }
+        //    }
+        //////TOGGLE FOR EASY MODE
+        if (int(clock->rotationS)%360 < 15 && int(clock->rotationS)%360 > 0 && door->doorTime == true){
+            showZero = true;
+        }
         
-    }
-    if (one->moveLeft == true){
-        clock->movementFactorS -= .3;
-    }
-    
-    if (one->location.x < 100 || (one->location.x>400 && one->location.x < 500) || (one->location.x > 800 && one->location.x < 900) || (one->location.x > 1200)){
-        clock->movementFactorH += .1;
-    }
-    
-    if (one->location.y < one->startingYpos){
-        clock->movementFactorM += .2;
-    }
-    if(secondFrame->yRotateState ==1){
-        ofSetColor(178,255,233);
-        clock->drawHours();
-        ofSetColor(255);
-        clock->drawMinutes();
-        ofSetColor(242,105,105);
-        clock->drawSeconds();
-    }
-    
-    if (one->location.x > 1030 && one->location.x < 1130 && one->location.y <215 && one->location.y > 190){
-        downTheChimney = true;
-    }
-    
-    if(downTheChimney == true){
-        one->transported = true;
-    }
-    
-    if(one->location.x >= 1010 && one->location.x <= 1150 && one->location.y == 625){
-        appropriateDist = true;
-    } else {
-        appropriateDist = false;
-    }
-    
-    if(int(clock->rotationS)%360 < 15 && int(clock->rotationS)%360 > 0){
+        
+        if(showZero == true){
+            zero->display();
+            zero->move();
+            chimes.play();
+        }
+        brickChimney->drawChimney();
         if (door->interactionInitiated == false){
-            door->doorTime = true;
-            knock.play();
+            door->drawClosed();
+        }
+
+    
+        if (one->moveRight == true){
+            clock->movementFactorS += .5;
+            
+        }
+        if (one->moveLeft == true){
+            clock->movementFactorS -= .3;
+        }
+        
+        if (one->location.x < 100 || (one->location.x>400 && one->location.x < 500) || (one->location.x > 800 && one->location.x < 900) || (one->location.x > 1200)){
+            clock->movementFactorH += .1;
+        }
+        
+        if (one->location.y < one->startingYpos){
+            clock->movementFactorM += .2;
+        }
+        if(secondFrame->yRotateState ==1){
+            ofSetColor(178,255,233);
+            clock->drawHours();
+            ofSetColor(255);
+            clock->drawMinutes();
+            ofSetColor(242,105,105);
+            clock->drawSeconds();
+        }
+        
+        if (one->location.x > 1030 && one->location.x < 1130 && one->location.y <215 && one->location.y > 190){
+            downTheChimney = true;
+        }
+        
+        if(downTheChimney == true){
+            one->transported = true;
+        }
+        
+        if(one->location.x >= 1010 && one->location.x <= 1150 && one->location.y == 625){
+            appropriateDist = true;
+        } else {
+            appropriateDist = false;
+        }
+        
+        if(int(clock->rotationS)%360 < 15 && int(clock->rotationS)%360 > 0){
+            if (door->interactionInitiated == false){
+                door->doorTime = true;
+                knock.play();
+            } else {
+                door->doorTime = false;
+            }
         } else {
             door->doorTime = false;
         }
-    } else {
-        door->doorTime = false;
-    }
-    
-    
-    if (one->location.y > 500){
-        activeFrame = 4;
-    } else if (one->location.y < 500){
-        if (one->location.x > 100 && one->location.x < 400){
-            activeFrame = 1;
-        } else if (one->location.x > 500 && one->location.x < 800){
-            activeFrame = 2;
-        } else if (one->location.x > 900 && one->location.x < 1200){
-            activeFrame = 3;
+        
+        if (one->location.y > 500){
+            activeFrame = 4;
+        } else if (one->location.y < 500){
+            if (one->location.x > 100 && one->location.x < 400){
+                activeFrame = 1;
+            } else if (one->location.x > 500 && one->location.x < 800){
+                activeFrame = 2;
+            } else if (one->location.x > 900 && one->location.x < 1200){
+                activeFrame = 3;
+            }
         }
-    }
-    
-    //    cout << "mins " << clock->mins << endl;
     cout << "rotationS : " << clock->rotationS << endl;
     cout << "location.y? " << one->location.y << endl;
     cout << "location.x? " << one->location.x << endl;
-    
+    }
 }
 
 //--------------------------------------------------------------
