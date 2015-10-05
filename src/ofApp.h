@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "Chapter7.h"
+#include "Chapter.h"
 
 class ofApp : public ofBaseApp{
 
@@ -29,4 +29,9 @@ class ofApp : public ofBaseApp{
 //		void windowResized(int w, int h);
 //		void dragEvent(ofDragInfo dragInfo);
 //		void gotMessage(ofMessage msg);
+    
+    ofTrueTypeFont arcadeFont;
+    ofTrueTypeFont visitorFont;
+    ofTrueTypeFont superScriptFont;
+    ofTrueTypeFont handyFont;
 };
