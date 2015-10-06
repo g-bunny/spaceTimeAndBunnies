@@ -11,7 +11,7 @@
 class Frame{
 public:
     Frame(ofColor frontColor, ofColor sideColor, ofColor topColor, int boxWidth, int boxHeight, int boxDepth, float marginX, float marginY, int perspectiveMode);
-    void draw();
+    void draw(int perspectiveMode);
     void lines();
     void display();
     void rotateMe();
@@ -67,4 +67,7 @@ public:
     
     float speedOfRotation;
     int perspectiveMode;
+    bool wallDeco;
+    
+    
 };

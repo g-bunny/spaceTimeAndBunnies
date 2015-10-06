@@ -155,7 +155,8 @@ void Frame::display(){
     
 }
 
-void Frame::draw(){
+void Frame::draw(int perspectiveMode){
+    this->perspectiveMode = perspectiveMode;
     ofPushMatrix();
     ofTranslate(marginX,marginY);
     box.setPosition(0, 0,0);
@@ -203,16 +204,25 @@ void Frame::draw(){
         faceRight.draw();
         ofSetColor(topColor);
         faceBot.draw();
-        ofSetColor(frontColor);
-        faceFront.draw();
-        
+//        ofSetColor(frontColor);
+//        faceFront.draw();
+        ofPushMatrix();
+        ofTranslate(0,0,1);
         ofSetColor(0,0,0);
         linesBack.draw();
+        ofPopMatrix();
+        ofPushMatrix();
+        ofTranslate(0,1,0);
         linesTop.draw();
         linesLeft.draw();
         linesRight.draw();
+        ofPopMatrix();
+        ofPushMatrix();
+        ofTranslate(0, -1,1);
         linesBot.draw();
+        ofPopMatrix();
         linesFront.draw();
+        
     } else if (perspectiveMode == 3){
             ofSetColor(frontColor);
             faceBack.draw();

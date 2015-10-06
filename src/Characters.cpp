@@ -12,6 +12,7 @@
 ofImage walk[MAXIMAGES];
 ofImage walkLeft[MAXIMAGES];
 ofImage zeroWalk[MAXIMAGES];
+ofImage zeroWalkLeft[MAXIMAGES];
 
 Characters::Characters(float x, float y, float z, int characterMode){
     location.x = x;
@@ -79,7 +80,15 @@ Characters::Characters(float x, float y, float z, int characterMode){
         zeroWalk[5].loadImage("zeroBunnySprite5.png");
         zeroWalk[6].loadImage("zeroBunnySprite6.png");
         zeroWalk[7].loadImage("zeroBunnySprite7.png");
-        zeroWalk[imageIndex].mirror(false, true);
+
+        zeroWalkLeft[0].loadImage("zeroBunnySpriteLeft0.png");
+        zeroWalkLeft[1].loadImage("zeroBunnySpriteLeft1.png");
+        zeroWalkLeft[2].loadImage("zeroBunnySpriteLeft2.png");
+        zeroWalkLeft[3].loadImage("zeroBunnySpriteLeft3.png");
+        zeroWalkLeft[4].loadImage("zeroBunnySpriteLeft4.png");
+        zeroWalkLeft[5].loadImage("zeroBunnySpriteLeft5.png");
+        zeroWalkLeft[6].loadImage("zeroBunnySpriteLeft6.png");
+        zeroWalkLeft[7].loadImage("zeroBunnySpriteLeft7.png");
 
 //        jumpingBunny.loadImage("zeroJumpingBunny.png");
     }
@@ -97,15 +106,12 @@ void Characters::display(){
     if (ofGetFrameNum() % 7 == 0){
         imageIndex = (imageIndex + 1) % MAXIMAGES;
         location.x += movementSpeed;
+        location.y += movementSpeedY;
 
     }
-//    ofTranslate(ofGetWidth()/2 + displacementX, ofGetHeight()/2 + displacementY, startingZpos + displacementZ);
-//
-//    ofTranslate(ofGetWidth()/2 + location.x + displacementX ,ofGetHeight()/2 +  location.y + displacementY);
-//        ofPopMatrix();
-
     
-    if (isPlayer == true){
+    if (characterMode ==1){
+        ofTranslate(0,0,location.z + displacementZ);
         ///////////////////right
         if (moveRight == true){
             movementSpeed = 7;
@@ -121,7 +127,6 @@ void Characters::display(){
                 jumpingBunny.draw(location.x, location.y, characterWidth + 15, characterHeight - 10);
                 timer->jumpedTime();
                 location.y = location.y + jumpForce +(normalGravity.y)*(timer->jumpTimer*timer->jumpTimer);
-//                println(location.y);
                 if (location.y >= startingYpos) {
                     justJumped = false;
                     afterJump = true;
@@ -143,15 +148,12 @@ void Characters::display(){
                 jumpingBunnyLeft.draw(location.x, location.y, characterWidth + 15, characterHeight - 10);
                 timer->jumpedTime();
                 location.y =location.y + jumpForce +(normalGravity.y)*(timer->jumpTimer*timer->jumpTimer);
-                //                println(location.y);
                 if (location.y >= startingYpos) {
                     justJumped = false;
                     afterJump = true;
                 }
-
             }
         }
-
         /////////////////////standing still facing right
         if (moveRight == false && moveLeft == false && moveUp == false && moveDown == false && justJumped == false && lastMovedRight == true) {
             movementSpeed = 0;
@@ -203,44 +205,130 @@ void Characters::display(){
             justJumped = false;
             afterJump = false;
         }
-        //    println("location.y = " + location.y);
-        //    println("currentYpos = " + currentYpos);
-//        if (currentYpos > startingYpos) {
-//            currentYpos = startingYpos;
-//        }
     }
     
-    if(isZero == true){
-//        if (moveRight == false && moveLeft == false && moveUp == false && moveDown == false && justJumped == false && lastMovedRight == true) {
-//            //        rotateX(angle);
-//        ofScale(-1,1);
+    if (characterMode ==0){
+        ofTranslate(0,0,location.z + displacementZ);
+        ///////////////////right
+        if (moveRight == true){
+            movementSpeed = 7;
+            movementSpeedY = zeroUpwards;
+            if (justJumped == false) {
+                zeroWalk[imageIndex].draw(location.x, location.y, characterWidth, characterHeight);
+                lastMovedRight = true;
+                lastMovedLeft = false;
+            }
+            /////////////////////right + jump
+            if (justJumped == true) {
+                afterJump = false;
+                lastMovedRight = true;
+                jumpingBunny.draw(location.x, location.y, characterWidth + 15, characterHeight - 10);
+                timer->jumpedTime();
+                location.y = location.y + jumpForce +(normalGravity.y)*(timer->jumpTimer*timer->jumpTimer);
+//                if (location.y >= startingYpos) {
+//                    justJumped = false;
+//                    afterJump = true;
+//                }
+            }
+        }
+        /////////////////////left
+        if (moveLeft == true) {
+            movementSpeed = -7;
+            movementSpeedY = -zeroUpwards;
+            if (justJumped == false){
+                zeroWalkLeft[imageIndex].draw(location.x, location.y, characterWidth, characterHeight);
+                moveRight = false;
+                lastMovedRight = false;
+                lastMovedLeft = true;
+            }
+            if (justJumped == true){
+                afterJump = false;
+                lastMovedLeft = true;
+                jumpingBunnyLeft.draw(location.x, location.y, characterWidth + 15, characterHeight - 10);
+                timer->jumpedTime();
+                location.y =location.y + jumpForce +(normalGravity.y)*(timer->jumpTimer*timer->jumpTimer);
+//                if (location.y >= startingYpos) {
+//                    justJumped = false;
+//                    afterJump = true;
+//                }
+            }
+        }
+        /////////////////////standing still facing right
+        if (moveRight == false && moveLeft == false && moveUp == false && moveDown == false && justJumped == false && lastMovedRight == true) {
+            movementSpeed = 0;
+            movementSpeedY = 0;
             zeroWalk[0].draw(location.x, location.y, characterWidth, characterHeight);
+        }
+        //////standing still facing left
+        if (moveRight == false && moveLeft == false && moveUp == false && moveDown == false && justJumped == false && lastMovedLeft == true) {
+            movementSpeed = 0;
+            movementSpeedY = 0;
+            zeroWalkLeft[0].draw(location.x, location.y, characterWidth, characterHeight);
+        }
+        /////////////////////standing still start
+        if (moveRight == false && moveLeft == false && moveUp == false && moveDown == false && lastMovedRight == false && lastMovedLeft == false) {
+            movementSpeed = 0;
+            movementSpeedY = 0;
+            zeroWalkLeft[0].draw(location.x, location.y, characterWidth, characterHeight);
+        }
+        
+        
+//        //////////JUMP
+//        ///facing right
+//        if (justJumped == true && lastMovedRight == true && moveRight == false) {
+//            afterJump = false;
+//            jumpingBunny.draw(location.x, location.y, characterWidth + 15, characterHeight - 10);
+//            timer->jumpedTime();
+//            location.y = location.y + jumpForce + (normalGravity.y)*(timer->jumpTimer * timer->jumpTimer);
+//            if (location.y >= startingYpos) {
+//                justJumped = false;
+//                afterJump = true;
+//            }
 //        }
-//        /////////////////////standing still start
-//        if (moveRight == false && moveLeft == false && moveUp == false && moveDown == false && lastMovedRight == false && lastMovedLeft == false) {
-//            //        rotateX(angle);
+//        //////////JUMP
+//        ///facing left
+//        if (justJumped == true && lastMovedLeft == true && moveLeft == false){
+//            afterJump = false;
+//            jumpingBunnyLeft.draw(location.x, location.y, characterWidth + 15, characterHeight - 10);
+//            timer->jumpedTime();
+//            location.y = location.y + jumpForce + (normalGravity.y)*(timer->jumpTimer * timer->jumpTimer);
+//            if (location.y >= startingYpos) {
+//                justJumped = false;
+//                afterJump = true;
+//            }
+//        }
+//        
+//        if (afterJump == true) {
+//            cout << "working" << endl;
+//            timer->reset();
+//            location.y = startingYpos;
+//            timer->reset();
 //            zeroWalk[0].draw(location.x, location.y, characterWidth, characterHeight);
+//            justJumped = false;
+//            afterJump = false;
 //        }
     }
-    
-    cout << "jumpTimer: " << timer->jumpTimer << endl;
-    cout << "initialTime: " << timer->initialTime << endl;
-    
+
     if (transported == true){
-        location.y = 625;
-        startingYpos = 625;
-        currentYpos = 625;
-        transported = false;
+        location.y = 550;
+        startingYpos = 550;
+        currentYpos = 550;
+//        transported = false;
     }
     
+    if(isZero == true && characterMode == 2){
+        zeroWalk[0].draw(location.x, location.y, characterWidth, characterHeight);
+    }
 }
 
 void Characters::move(){
     if (moveRight == true){
         displacementX += movementSpeed;
+        displacementY += movementSpeedY;
     }
     if (moveLeft == true){
         displacementX -= movementSpeed;
+        displacementY -= movementSpeedY;
     }
 }
 

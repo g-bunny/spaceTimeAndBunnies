@@ -7,8 +7,8 @@
 //
 #include "ofMain.h"
 #include "Frame.hpp"
-#include "Characters.hpp"
-#include "Item.h"
+//#include "Characters.hpp"
+//#include "Item.h"
 #include "cubeItems.h"
 #define HOURLENGTH 4
 #define MINLENGTH 5
@@ -16,7 +16,7 @@
 
 class Chapter{
 public:
-    Chapter(int chapNum, int numOfFrames, int frameWidth, int frameHeight, int frameDepth, float marginX, float marginY, int frameWidth2, int frameHeight2, int frameDepth2, float marginX2, float marginY2, int frameWidth3, int frameHeight3, int frameDepth3, float marginX3, float marginY3, int frameWidth4, int frameHeight4, int frameDepth4, float marginX4, float marginY4);
+    Chapter(int chapNum, int numOfFrames, int persp1, int persp2, int persp3, int persp4, int frameWidth, int frameHeight, int frameDepth, float marginX, float marginY, int frameWidth2, int frameHeight2, int frameDepth2, float marginX2, float marginY2, int frameWidth3, int frameHeight3, int frameDepth3, float marginX3, float marginY3, int frameWidth4, int frameHeight4, int frameDepth4, float marginX4, float marginY4);
     void update();
     void draw();
     
@@ -29,18 +29,13 @@ public:
     Frame * hourFrames[HOURLENGTH];
     Frame * minFrames[MINLENGTH];
     Frame * secFrames[SECLENGTH];
-    Characters * one;
-    Characters * zero;
-    Timer * timer;
+//    Characters * one;
+//    Characters * zero;
+//    Timer * timer;
     ofSoundPlayer talk;
     ofSoundPlayer knock;
     ofSoundPlayer chimes;
-    Item * door;
-    Item * brickChimney;
-    Item * clock;
-    Item * homeSign;
-    Item * groundSign;
-    Item * cityScape;
+
     
     float hourIncrement = 0.5;
     float minIncrement = 1;
@@ -77,11 +72,12 @@ public:
     string objectsPlaced1;
     string objectsPlaced2;
     
-    ofTrueTypeFont arcadeFont;
-    ofTrueTypeFont visitorFont;
-    ofTrueTypeFont superScriptFont;
-    ofTrueTypeFont handyFont;
     
-    ofEasyCam cam1;
+    int persp1, persp2, persp3, persp4;
+    
+
+    
+    
+//    ofEasyCam cam1;
 
 };

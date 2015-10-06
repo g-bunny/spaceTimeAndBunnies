@@ -2,6 +2,8 @@
 
 #include "ofMain.h"
 #include "Chapter.h"
+#include "Item.h"
+#include "Characters.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -16,7 +18,35 @@ class ofApp : public ofBaseApp{
     Chapter * chapter2;
     Chapter * chapter3;
     Chapter * chapter7;
-		
+    
+    Characters * one;
+    Characters * two;
+    Characters * three;
+    Characters * seven;
+    Characters * zero;
+    Characters * playableZero;
+    
+    Item * door;
+    Item * brickChimney;
+    Item * clock;
+    Item * homeSign;
+    Item * groundSign;
+    Item * cityScape;
+    Item * citySlope;
+    Item * runes1;
+    Item * runes2;
+    Item * runes3;
+    Item * runes4;
+    Item * runes5;
+    Item * runes6;
+    Item * runes7;
+
+    Timer * timer;
+    
+    ofTrueTypeFont arcadeFont;
+    ofTrueTypeFont visitorFont;
+    ofTrueTypeFont superScriptFont;
+    ofTrueTypeFont handyFont;
     int currentChapter = 1;
     
     int widthThirds = 300;
@@ -38,4 +68,5 @@ class ofApp : public ofBaseApp{
     int fullWidth = 850;
     int smallMargin;
 
+    bool signChanged = false;
 };
