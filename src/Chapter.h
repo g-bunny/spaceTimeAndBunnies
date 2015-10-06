@@ -16,7 +16,7 @@
 
 class Chapter{
 public:
-    Chapter(int chapNum, int numOfFrames, int frameWidth, int frameHeight, int frameDepth, float marginX, float marginY, string objectsPlaced1, string objectsPlaced2);
+    Chapter(int chapNum, int numOfFrames, int frameWidth, int frameHeight, int frameDepth, float marginX, float marginY, int frameWidth2, int frameHeight2, int frameDepth2, float marginX2, float marginY2, int frameWidth3, int frameHeight3, int frameDepth3, float marginX3, float marginY3, int frameWidth4, int frameHeight4, int frameDepth4, float marginX4, float marginY4);
     void update();
     void draw();
     
@@ -50,12 +50,28 @@ public:
     
     bool showZero = false;
     int activeFrame = 0;
+        
     int numOfFrames;
     int frameWidth;
     int frameHeight;
     int frameDepth;
     float marginX;
     float marginY;
+    int frameWidth2;
+    int frameHeight2;
+    int frameDepth2;
+    int frameWidth3;
+    int frameHeight3;
+    int frameDepth3;
+    int frameWidth4;
+    int frameHeight4;
+    int frameDepth4;
+    float marginX2;
+    float marginY2;
+    float marginX3;
+    float marginY3;
+    float marginX4;
+    float marginY4;
     int chapNum = 0;
     string objectsPlaced1;
     string objectsPlaced2;
@@ -64,5 +80,7 @@ public:
     ofTrueTypeFont visitorFont;
     ofTrueTypeFont superScriptFont;
     ofTrueTypeFont handyFont;
+    
+    ofEasyCam cam1;
 
 };

@@ -8,33 +8,50 @@
 
 #include "Chapter.h"
 
-int height = 20;
-int width = 30;
-int insideLength = 15;
+//int height = 20;
+//int width = 30;
+//int insideLength = 15;
 const ofColor lavender = ofColor(176,183,255);
 const ofColor blue = ofColor(178,255,233);
 const ofColor red = ofColor(242,105,105);
 
-Chapter::Chapter(int chapNum, int numOfFrames, int frameWidth, int frameHeight, int frameDepth, float marginX, float marginY, string objectsPlaced1, string objectsPlaced2){
+Chapter::Chapter(int chapNum, int numOfFrames, int frameWidth, int frameHeight, int frameDepth, float marginX, float marginY, int frameWidth2, int frameHeight2, int frameDepth2, float marginX2, float marginY2, int frameWidth3, int frameHeight3, int frameDepth3, float marginX3, float marginY3, int frameWidth4, int frameHeight4, int frameDepth4, float marginX4, float marginY4){
+    
     this->frameWidth = frameWidth;
     this->numOfFrames = numOfFrames;
     this->frameHeight = frameHeight;
     this->frameDepth = frameDepth;
     this->marginX = marginX;
     this->marginY = marginY;
-    this->objectsPlaced1 = objectsPlaced1;
-    this->objectsPlaced2 = objectsPlaced2;
+    this->marginX2 = marginX2;
+    this->marginX3 = marginX3;
+    this->marginX4 = marginX4;
+    this->marginX2 = marginY2;
+    this->marginX3 = marginY3;
+    this->marginX4 = marginY4;
+    this->frameWidth2 = frameWidth2;
+    this->frameWidth3 = frameWidth3;
+    this->frameWidth4 = frameWidth4;
+    this->frameHeight2 = frameHeight2;
+    this->frameHeight3 = frameHeight3;
+    this->frameHeight4 = frameHeight4;
+    this->frameDepth2 = frameDepth2;
+    this->frameDepth3 = frameDepth3;
+    this->frameDepth4 = frameDepth4;
+
+    this->chapNum = chapNum;
+    
 //    if (numOfFrames >=1 ){
         this->firstFrame = new Frame(lavender, blue, blue, frameWidth, frameHeight, frameDepth, marginX, marginY, 1);
 //    }
 //    if (numOfFrames >=2){
-        this->secondFrame = new Frame(lavender, lavender, blue, 300, 300, 300, 687.5,250, 1);
+        this->secondFrame = new Frame(lavender, lavender, blue, frameWidth2, frameHeight2, frameDepth2, marginX2,marginY2, 1);
 //    }
 //    if (numOfFrames >=3){
-        this->thirdFrame = new Frame(lavender, blue, red, 300, 300, 100, 1100, 250, 1);
+        this->thirdFrame = new Frame(lavender, blue, red, frameWidth3, frameHeight3, frameDepth3, marginX3, marginX3, 1);
 //    }
 //    if (numOfFrames >=4){
-        this->fourthFrame = new Frame(lavender, red, red, 1125, 300, 100, 687.5, 625, 2);
+        this->fourthFrame = new Frame(lavender, red, red, frameWidth4, frameHeight4, frameDepth4, marginX4, marginY4, 2);
 //    }
     this->one = new Characters(200,248,0,1);
     this->zero = new Characters(1070,570,0,2);
@@ -42,7 +59,7 @@ Chapter::Chapter(int chapNum, int numOfFrames, int frameWidth, int frameHeight, 
     this->brickChimney = new Item(2, 1050, 296);
     this->door = new Item(2,1030,540);
     this->clock = new Item(3, 690,200);
-    this->homeSign = new Item(2,825,400);
+//    this->homeSign = new Item(2,825,400);
 
     //    talk.loadSound("sounds/chimes.wav");
     knock.loadSound("sounds/knock.wav");
@@ -60,6 +77,9 @@ Chapter::Chapter(int chapNum, int numOfFrames, int frameWidth, int frameHeight, 
 
     
     ofBackground(255);
+    ofSetVerticalSync(true);
+    ofEnableDepthTest();
+//    cam1.setDistance(100);
 }
 
 //--------------------------------------------------------------
@@ -71,8 +91,14 @@ void Chapter::update(){
 //--------------------------------------------------------------
 void Chapter::draw(){
     if (numOfFrames >=1 ){
+//        cam1.begin();
+//        ofRotateX(ofRadToDeg(.5));
+//        ofRotateY(ofRadToDeg(-.5));
         firstFrame->display();
         firstFrame->draw();
+//        if(cam1.getMouseInputEnabled()) cam1.disableMouseInput();
+//        else cam1.enableMouseInput();
+//        cam1.end();
     }
     if (numOfFrames >=2 ){
         secondFrame->display();
@@ -93,13 +119,56 @@ void Chapter::draw(){
         firstFrame->perspectiveMode = 2;
         firstFrame->sideColor = lavender;
         firstFrame->topColor = lavender;
-        homeSign->drawHangingSign();
-        arcadeFont.drawString("Home \nSweet \nHome", 850, 500);
+//        if (firstFrame->yRotateState ==0){
+//            homeSign->xPos = 825;
+//            homeSign->drawHangingSign();
+//            arcadeFont.drawString("Home \nSweet \nHome", 850, 500);
+//        } else if (firstFrame->yRotateState ==1){
+//            ofPushMatrix();
+//            ofTranslate(0,0,0);
+//            ofRotateY(90);
+//            homeSign->drawHangingSign();
+//            ofPopMatrix();
+//            
+//        } else if (firstFrame->yRotateState ==2){
+//            ofPushMatrix();
+//            ofTranslate(0,0,0);
+//            ofRotateY(270);
+////            homeSign->xPos = 325;
+//            homeSign->drawHangingSign();
+//
+//            arcadeFont.drawString("There \nis No \nEscape", 850, 500);
+//
+//            ofPopMatrix();
+//
+//        }
+        one->location.y = 600;
         
         if (one->location.x > 100 && one->location.x < 1000){
             activeFrame = 1;
         } else {
             activeFrame = 0;
+        }
+    }
+    //////////////////////////////CHAPTER 2
+    if (chapNum == 2){
+        firstFrame->sideColor = red;
+        firstFrame->topColor = lavender;
+        secondFrame->frontColor = red;
+        secondFrame->sideColor = lavender;
+        secondFrame->topColor = lavender;
+        secondFrame->boxWidth = 100;
+        secondFrame->boxHeight = 100;
+        secondFrame->boxDepth = 100;
+        secondFrame->marginX = 100 * 2 + 100;
+        secondFrame->marginY = 100;
+        one->location.y = 600;
+        one->location.x = 200;
+        
+        if(one->location.x > 300 && one->location.x < 400){
+            if(one->location.y >= 400){
+                one->location.y += 2;
+            }
         }
     }
     
