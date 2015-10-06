@@ -40,6 +40,7 @@ public:
     Item * clock;
     Item * homeSign;
     Item * groundSign;
+    Item * cityScape;
     
     float hourIncrement = 0.5;
     float minIncrement = 1;

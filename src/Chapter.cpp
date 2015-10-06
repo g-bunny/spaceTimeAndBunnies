@@ -15,7 +15,11 @@ const ofColor lavender = ofColor(176,183,255);
 const ofColor blue = ofColor(178,255,233);
 const ofColor red = ofColor(242,105,105);
 
-Chapter::Chapter(int chapNum, int numOfFrames, int frameWidth, int frameHeight, int frameDepth, float marginX, float marginY, int frameWidth2, int frameHeight2, int frameDepth2, float marginX2, float marginY2, int frameWidth3, int frameHeight3, int frameDepth3, float marginX3, float marginY3, int frameWidth4, int frameHeight4, int frameDepth4, float marginX4, float marginY4){
+Chapter::Chapter(int chapNum, int numOfFrames,
+                 int frameWidth, int frameHeight, int frameDepth, float marginX, float marginY,
+                 int frameWidth2, int frameHeight2, int frameDepth2, float marginX2, float marginY2,
+                 int frameWidth3, int frameHeight3, int frameDepth3, float marginX3, float marginY3,
+                 int frameWidth4, int frameHeight4, int frameDepth4, float marginX4, float marginY4){
     
     this->frameWidth = frameWidth;
     this->numOfFrames = numOfFrames;
@@ -23,22 +27,26 @@ Chapter::Chapter(int chapNum, int numOfFrames, int frameWidth, int frameHeight, 
     this->frameDepth = frameDepth;
     this->marginX = marginX;
     this->marginY = marginY;
-    this->marginX2 = marginX2;
-    this->marginX3 = marginX3;
-    this->marginX4 = marginX4;
-    this->marginX2 = marginY2;
-    this->marginX3 = marginY3;
-    this->marginX4 = marginY4;
+    
     this->frameWidth2 = frameWidth2;
-    this->frameWidth3 = frameWidth3;
-    this->frameWidth4 = frameWidth4;
     this->frameHeight2 = frameHeight2;
-    this->frameHeight3 = frameHeight3;
-    this->frameHeight4 = frameHeight4;
     this->frameDepth2 = frameDepth2;
+    this->marginX2 = marginX2;
+    this->marginY2 = marginY2;
+    
+    this->frameWidth3 = frameWidth3;
+    this->frameHeight3 = frameHeight3;
     this->frameDepth3 = frameDepth3;
-    this->frameDepth4 = frameDepth4;
+    this->marginX3 = marginX3;
+    this->marginY3 = marginY3;
 
+
+    this->frameWidth4 = frameWidth4;
+    this->frameHeight4 = frameHeight4;
+    this->frameDepth4 = frameDepth4;
+    this->marginX4 = marginX4;
+    this->marginY4 = marginY4;
+    
     this->chapNum = chapNum;
     
 //    if (numOfFrames >=1 ){
@@ -48,7 +56,7 @@ Chapter::Chapter(int chapNum, int numOfFrames, int frameWidth, int frameHeight, 
         this->secondFrame = new Frame(lavender, lavender, blue, frameWidth2, frameHeight2, frameDepth2, marginX2,marginY2, 1);
 //    }
 //    if (numOfFrames >=3){
-        this->thirdFrame = new Frame(lavender, blue, red, frameWidth3, frameHeight3, frameDepth3, marginX3, marginX3, 1);
+        this->thirdFrame = new Frame(lavender, blue, red, frameWidth3, frameHeight3, frameDepth3, marginX3, marginY3, 1);
 //    }
 //    if (numOfFrames >=4){
         this->fourthFrame = new Frame(lavender, red, red, frameWidth4, frameHeight4, frameDepth4, marginX4, marginY4, 2);
@@ -59,7 +67,8 @@ Chapter::Chapter(int chapNum, int numOfFrames, int frameWidth, int frameHeight, 
     this->brickChimney = new Item(2, 1050, 296);
     this->door = new Item(2,1030,540);
     this->clock = new Item(3, 690,200);
-//    this->homeSign = new Item(2,825,400);
+    this->homeSign = new Item(2,825,400);
+    this->cityScape = new Item(3, 100, 100);
 
     //    talk.loadSound("sounds/chimes.wav");
     knock.loadSound("sounds/knock.wav");
@@ -119,29 +128,29 @@ void Chapter::draw(){
         firstFrame->perspectiveMode = 2;
         firstFrame->sideColor = lavender;
         firstFrame->topColor = lavender;
-//        if (firstFrame->yRotateState ==0){
-//            homeSign->xPos = 825;
-//            homeSign->drawHangingSign();
-//            arcadeFont.drawString("Home \nSweet \nHome", 850, 500);
-//        } else if (firstFrame->yRotateState ==1){
-//            ofPushMatrix();
-//            ofTranslate(0,0,0);
-//            ofRotateY(90);
-//            homeSign->drawHangingSign();
-//            ofPopMatrix();
-//            
-//        } else if (firstFrame->yRotateState ==2){
-//            ofPushMatrix();
-//            ofTranslate(0,0,0);
-//            ofRotateY(270);
-////            homeSign->xPos = 325;
-//            homeSign->drawHangingSign();
-//
-//            arcadeFont.drawString("There \nis No \nEscape", 850, 500);
-//
-//            ofPopMatrix();
-//
-//        }
+        if (firstFrame->yRotateState ==0){
+            homeSign->xPos = 825;
+            homeSign->drawHangingSign();
+            arcadeFont.drawString("Home \nSweet \nHome", 850, 500);
+        } else if (firstFrame->yRotateState ==1){
+            ofPushMatrix();
+            ofTranslate(0,0,0);
+            ofRotateY(90);
+            homeSign->drawHangingSign();
+            ofPopMatrix();
+            
+        } else if (firstFrame->yRotateState ==2){
+            ofPushMatrix();
+            ofTranslate(0,0,0);
+            ofRotateY(270);
+//            homeSign->xPos = 325;
+            homeSign->drawHangingSign();
+
+            arcadeFont.drawString("There \nis No \nEscape", 850, 500);
+
+            ofPopMatrix();
+
+        }
         one->location.y = 600;
         
         if (one->location.x > 100 && one->location.x < 1000){
@@ -157,11 +166,6 @@ void Chapter::draw(){
         secondFrame->frontColor = red;
         secondFrame->sideColor = lavender;
         secondFrame->topColor = lavender;
-        secondFrame->boxWidth = 100;
-        secondFrame->boxHeight = 100;
-        secondFrame->boxDepth = 100;
-        secondFrame->marginX = 100 * 2 + 100;
-        secondFrame->marginY = 100;
         one->location.y = 600;
         one->location.x = 200;
         
@@ -176,6 +180,7 @@ void Chapter::draw(){
         firstFrame->frontColor = blue;
         firstFrame->sideColor = blue;
         firstFrame->topColor = red;
+        cityScape->drawCity();
         
     }
     if (chapNum == 7){
