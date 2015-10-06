@@ -20,6 +20,7 @@ public:
     void drawHangingSign();
     void drawGroundedSign();
     void drawGroundedSign2();
+    void drawCity();
     
     //0 - cube type; 1 - collectible type; 2 - interaction type; 3 - noCollider type; 4 - collider type
     int itemType;
@@ -45,6 +46,7 @@ public:
     ofImage hangingSign;
     ofImage groundedSign;
     ofImage groundedSign2;
+    ofImage cityScape;
     float shake;
     bool interactionInitiated = false;
     bool doorTime = false;

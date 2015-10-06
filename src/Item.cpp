@@ -17,6 +17,7 @@ Item:: Item(int itemType, int xPos, int yPos){
     hangingSign.loadImage("hangingSign.png");
     groundedSign.loadImage("groundedSignWithout.png");
     groundedSign2.loadImage("groundedSignWithDrawing.png");
+    cityScape.loadImage("cityScape_small.png");
 }
 
 void Item:: drawOpen(){
@@ -33,7 +34,6 @@ void Item:: drawClosed(){
     if (doorTime == true){
         doorClosed.draw(xPos + shake, yPos + shake, 144, 210);
     }
-
 }
 
 void Item:: drawChimney(){
@@ -89,4 +89,9 @@ void Item::drawGroundedSign(){
 void Item::drawGroundedSign2(){
     ofSetColor(255,255,255,255);
     groundedSign.draw(xPos, yPos, 150, 150);
+}
+
+void Item::drawCity(){
+    ofSetColor(255,255,255,255);
+    cityScape.draw(xPos, yPos);
 }
