@@ -33,5 +33,9 @@ class ofApp : public ofBaseApp{
 //		void gotMessage(ofMessage msg);
     string fileName;
     ofImage capture;
+    int halfWidth = 400;
+    int fullHeight = 500;
+    int fullWidth = 850;
+    int smallMargin;
 
 };
