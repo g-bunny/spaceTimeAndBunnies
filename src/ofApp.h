@@ -4,6 +4,9 @@
 #include "Chapter.h"
 #include "Item.h"
 #include "Characters.hpp"
+#include "Grid.h"
+#include "Clock.h"
+#include "circleFrame.h"
 
 class ofApp : public ofBaseApp{
 
@@ -25,6 +28,8 @@ class ofApp : public ofBaseApp{
     Characters * seven;
     Characters * zero;
     Characters * playableZero;
+    
+    Grid * grid;
     
     Item * door;
     Item * brickChimney;
@@ -69,4 +74,12 @@ class ofApp : public ofBaseApp{
     int smallMargin;
 
     bool signChanged = false;
+    
+    bool grounded;
+    int minGround;
+    int maxGround;
+    circleFrame * sphere1;
+    
+    ofShader shader;
+    ofEasyCam cam;
 };

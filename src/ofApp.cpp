@@ -2,25 +2,30 @@
 
 
 void ofApp::setup(){
+    
+    ofEnableDepthTest();
+    shader.load("", "random1.frag");
+    
 //    this->chapter1 = new Chapter1();
     this->chapter7 = new Chapter(7, 4, 1,1,1,2, 300,300,100,275,250, 300,300,300,687.5,250, 300,300,100,1100,250, 1125,300,100,687.5,625);
     this->chapter1 = new Chapter(1, 1, 2,2,2,2, fullWidth,fullHeight,fullHeight,692.5,425, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0);
     this->chapter2 = new Chapter(2, 4, 1,1,1,1, 200,300,100,250,400, 200,300,100,550,400, 200,300,100,850,400, 200,300,100,1150,400);
     this->chapter3 = new Chapter(3, 2, 1,1,1,1,halfWidth + 125,fullHeight+100,fullHeight-300,400,425, halfWidth+125,fullHeight+100,fullHeight-300,975,425, 0,0,0,0,0, 0,0,0,0,0);
-
+    
+    this->sphere1 = new circleFrame(400);
     ofTrueTypeFont::setGlobalDpi(72);
     fileName = "screen1.png";
     chapter7->chapNum = 7;
     chapter1->chapNum = 1;
     chapter2->chapNum = 2;
     chapter3->chapNum = 3;
-    this->one = new Characters(350,525,0,1);
-    this->two = new Characters(350,410,0,1);
-    this->three = new Characters(350,525,0,1);
-    this->seven = new Characters(350,285,0,1);
+    this->one = new Characters(350,525,0,1,0);
+    this->two = new Characters(350,410,0,1,0);
+    this->three = new Characters(350,525,0,1,0);
+    this->seven = new Characters(350,285,0,1,0);
     
-    this->zero = new Characters(990,570,0,2);
-    this->playableZero = new Characters(1070, 400,0,0);
+    this->zero = new Characters(990,570,0,2,0);
+    this->playableZero = new Characters(1070, 400,0,0,0);
     this->timer = new Timer();
     
     arcadeFont.loadFont("fonts/arcade/ARCADE.TTF", 24);
@@ -78,7 +83,6 @@ void ofApp::update(){
     } else if (currentChapter == 3){
         chapter3->update();
     } else if (currentChapter == 7){
-
         chapter7->update();
     }
 }
@@ -86,7 +90,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     
-    
+//    grid->update();
     if (currentChapter == 1){
         chapter1->draw();
         if (chapter1->firstFrame->yRotateState ==0){
@@ -262,7 +266,8 @@ void ofApp::draw(){
                     clock->movementFactorS -= .3;
                 }
         
-                if (seven->location.x < 100 || (seven->location.x>400 && seven->location.x < 500) || (seven->location.x > 800 && seven->location.x < 900) || (seven->location.x > 1200)){
+                if (seven->location.x < 100 || (seven->location.x>470 && seven->location.x < 500) || (seven->location.x > 800 && seven->location.x < 830) || (seven->location.x > 1200)){
+                    seven->location.y += 5;
                     clock->movementFactorH += .1;
                 }
         
@@ -324,12 +329,16 @@ void ofApp::draw(){
         seven->display();
         seven->move();
         seven->jump();
-            ofPopMatrix();
-
-        
-        
-        
-
+        ofPopMatrix();
+    }
+    else if(currentChapter == 8){
+//        cam.begin();
+        shader.begin();
+        shader.setUniform2f("u_resolution", ofGetWidth(), ofGetHeight());
+        shader.setUniform1f("u_time", ofGetElapsedTimef());
+        sphere1->draw();
+        shader.end();
+//        cam.end();
     }
 
     
@@ -368,6 +377,9 @@ void ofApp::draw(){
             door->drawOpen();
             ofPopMatrix();
         }
+    }
+    else if (currentChapter == 8){
+        
     }
 }
 
@@ -487,6 +499,8 @@ void ofApp::keyReleased(int key){
         currentChapter = 3;
     } else if (key == '7'){
         currentChapter = 7;
+    } else if (key == '8'){
+        currentChapter = 8;
     }
 }
 ////--------------------------------------------------------------
@@ -497,19 +511,11 @@ void ofApp::keyReleased(int key){
 //}
 ////--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-//    ofSaveScreen(fileName);
-//    capture.loadImage("screen1.png");
-//    if (x < ofGetWindowWidth()/2){
-//        talk.play();
-//        talk.setSpeed(0.1f)
-//    }
-//    if (x > ofGetWindowWidth()/2 && x < ofGetWindowWidth()){
-//        door->interactionInitiated = true;
-//    }
+
 }
 ////--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-    currentChapter+=1;
+//    currentChapter+=1;
 }
 ////--------------------------------------------------------------
 //void ofApp::windowResized(int w, int h){

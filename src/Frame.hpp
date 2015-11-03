@@ -16,8 +16,8 @@ public:
     void display();
     void rotateMe();
     void proceduralRotation(int i);
-    ofBoxPrimitive box;
-    ofVboMesh boxSides[ofBoxPrimitive::SIDES_TOTAL];
+//    ofBoxPrimitive box;
+//    ofVboMesh boxSides[ofBoxPrimitive::SIDES_TOTAL];
 //    ofVboMesh deformPlane;
 //    ofVboMesh topCap, bottomCap, body;
     vector<ofMeshFace> triangles;

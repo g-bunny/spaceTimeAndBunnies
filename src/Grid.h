@@ -6,9 +6,11 @@
 //
 //
 
-#ifndef __spaceTimeAndBunnies__Grid__
-#define __spaceTimeAndBunnies__Grid__
+#include "ofMain.h"
 
-#include <stdio.h>
-
-#endif /* defined(__spaceTimeAndBunnies__Grid__) */
+class Grid {
+public:
+    Grid();
+    void update();
+    void display();
+};

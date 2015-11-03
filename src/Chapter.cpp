@@ -8,9 +8,6 @@
 
 #include "Chapter.h"
 
-//int height = 20;
-//int width = 30;
-//int insideLength = 15;
 const ofColor lavender = ofColor(176,183,255);
 const ofColor blue = ofColor(178,255,233);
 const ofColor red = ofColor(242,105,105);
@@ -54,34 +51,17 @@ Chapter::Chapter(int chapNum, int numOfFrames, int persp1, int persp2, int persp
     
     this->chapNum = chapNum;
     
-//    if (numOfFrames >=1 ){
         this->firstFrame = new Frame(lavender, blue, blue, frameWidth, frameHeight, frameDepth, marginX, marginY, persp1);
-//    }
-//    if (numOfFrames >=2){
         this->secondFrame = new Frame(lavender, lavender, blue, frameWidth2, frameHeight2, frameDepth2, marginX2,marginY2, persp2);
-//    }
-//    if (numOfFrames >=3){
         this->thirdFrame = new Frame(lavender, blue, red, frameWidth3, frameHeight3, frameDepth3, marginX3, marginY3, persp3);
-//    }
-//    if (numOfFrames >=4){
         this->fourthFrame = new Frame(lavender, lavender, red, frameWidth4, frameHeight4, frameDepth4, marginX4, marginY4, persp4);
-//    }
-//    this->one = new Characters(200,248,0,1);
-//    this->zero = new Characters(1070,570,0,2);
-//    this->timer = new Timer();
-
-    //    talk.loadSound("sounds/chimes.wav");
     knock.loadSound("sounds/knock.wav");
     chimes.loadSound("sounds/chimes.wav");
     talk.setVolume(0.75f);
     knock.setVolume(0.75f);
     chimes.setVolume(0.75f);
-    //    talk.setMultiPlay(true);
     knock.setMultiPlay(false);
     chimes.setMultiPlay(false);
-    
-
-
     
     ofBackground(255);
     ofSetVerticalSync(true);
@@ -115,39 +95,18 @@ void Chapter::draw(){
     if (numOfFrames >=4 ){
         fourthFrame->draw(persp4);
     }
+
     if (chapNum == 1){
-//        firstFrame->perspectiveMode = 2;
         firstFrame->sideColor = lavender;
         firstFrame->topColor = lavender;
-
-//            arcadeFont.drawString("There \nis No \nEscape", 850, 500);
-//
-//            ofPopMatrix();
-
-//        }
-//        one->location.y = 600;
-//        
-//        if (one->location.x > 100 && one->location.x < 1000){
-//            activeFrame = 1;
-//        } else {
-//            activeFrame = 0;
-//        }
     }
-    //////////////////////////////CHAPTER 2
+
     if (chapNum == 2){
         firstFrame->sideColor = red;
         firstFrame->topColor = lavender;
         secondFrame->frontColor = red;
         secondFrame->sideColor = lavender;
         secondFrame->topColor = lavender;
-//        one->location.y = 600;
-//        one->location.x = 200;
-//        
-//        if(one->location.x > 300 && one->location.x < 400){
-//            if(one->location.y >= 400){
-//                one->location.y += 2;
-//            }
-//        }
     }
     
     if (chapNum == 3){
@@ -155,135 +114,18 @@ void Chapter::draw(){
         firstFrame->sideColor = blue;
         firstFrame->topColor = red;
         secondFrame->frontColor = blue;
-        
+    }
+    if (chapNum == 4){
+        firstFrame->frontColor = lavender;
+        firstFrame->sideColor = blue;
+        firstFrame->topColor = lavender;
     }
     if (chapNum == 7){
     }
-
-        //    if (int(clock->rotationS)%360 < 15 && int(clock->rotationS)%360 > 0 && door->doorTime == true){
-        //        if (int(clock->rotationM)%360 < 15 && int(clock->rotationM)%360 > 0 && door->doorTime == true){
-        //            if (int(clock->rotationH)%360 < 15 && int(clock->rotationH)%360 > 0 && door->doorTime == true){
-        //                if(door->interactionInitiated){
-        //                                showZero = true;
-        //                }
-        //            }
-        //        }
-        //    }
-        //////TOGGLE FOR EASY MODE
-//        if (int(clock->rotationS)%360 < 15 && int(clock->rotationS)%360 > 0 && door->doorTime == true){
-//            showZero = true;
-//        }
-//        
-//        
-//        if(showZero == true){
-//            zero->display();
-//            zero->move();
-//            chimes.play();
-//        }
-//        brickChimney->drawChimney();
-//        if (door->interactionInitiated == false){
-//            door->drawClosed();
-//        }
-//
-//    
-//        if (one->moveRight == true){
-//            clock->movementFactorS += .5;
-//            
-//        }
-//        if (one->moveLeft == true){
-//            clock->movementFactorS -= .3;
-//        }
-//        
-//        if (one->location.x < 100 || (one->location.x>400 && one->location.x < 500) || (one->location.x > 800 && one->location.x < 900) || (one->location.x > 1200)){
-//            clock->movementFactorH += .1;
-//        }
-//        
-//        if (one->location.y < one->startingYpos){
-//            clock->movementFactorM += .2;
-//        }
-//        if(secondFrame->yRotateState ==1){
-//            ofSetColor(178,255,233);
-//            clock->drawHours();
-//            ofSetColor(255);
-//            clock->drawMinutes();
-//            ofSetColor(242,105,105);
-//            clock->drawSeconds();
-//        }
-//        if (one->location.x > 1030 && one->location.x < 1130 && one->location.y <215 && one->location.y > 190){
-//            downTheChimney = true;
-//        }
-//        if(downTheChimney == true){
-//            one->transported = true;
-//        }
-//        if(one->location.x >= 1010 && one->location.x <= 1150 && one->location.y == 625){
-//            appropriateDist = true;
-//        } else {
-//            appropriateDist = false;
-//        }
-//        if(int(clock->rotationS)%360 < 15 && int(clock->rotationS)%360 > 0){
-//            if (door->interactionInitiated == false){
-//                door->doorTime = true;
-//                knock.play();
-//            } else {
-//                door->doorTime = false;
-//            }
-//        } else {
-//            door->doorTime = false;
-//        }
-    
-//        if (one->location.y > 500){
-//            activeFrame = 4;
-//        } else if (one->location.y < 500){
-//            if (one->location.x > 100 && one->location.x < 400){
-//                activeFrame = 1;
-//            } else if (one->location.x > 500 && one->location.x < 800){
-//                activeFrame = 2;
-//            } else if (one->location.x > 900 && one->location.x < 1200){
-//                activeFrame = 3;
-//            }
-//        }
-//    cout << "rotationS : " << clock->rotationS << endl;
-//    cout << "location.y? " << one->location.y << endl;
-//    cout << "location.x? " << one->location.x << endl;
-//    }
-//    ofPushMatrix();
-//    ofTranslate(0,0, 50);
-//    one->display();
-//    one->move();
-//    one->jump();
-//    ofPopMatrix();
-
 }
 
 //--------------------------------------------------------------
 void Chapter::keyPressed(int key){
-//    if (key == OF_KEY_RIGHT){
-//        one->moveRight = true;
-//    }
-//    if (key == OF_KEY_LEFT){
-//        one->moveLeft = true;
-//    }
-//    if (key == OF_KEY_UP){
-//        one->moveUp = true;
-//    }
-//    if (key == OF_KEY_DOWN){
-//        one->moveDown = true;
-//    }
-//    if (key == OF_KEY_RIGHT_SHIFT){
-//        one->jumped = true;
-//    }
-//    if (key == OF_KEY_LEFT_SHIFT){
-//        if (appropriateDist == true){
-//            if (door->interactionInitiated == false){
-//                door->interactionInitiated = true;
-//            } else {
-//                door->interactionInitiated = false;
-//            }
-//        } else {
-//            door->interactionInitiated = false;
-//        }
-//    }
-    
 }
 
 //--------------------------------------------------------------
@@ -332,16 +174,4 @@ void Chapter::keyReleased(int key){
             fourthFrame->flipDown = true;
         }
     }
-//    if (key == OF_KEY_RIGHT){
-//        one->moveRight = false;
-//    }
-//    if (key == OF_KEY_LEFT){
-//        one->moveLeft = false;
-//    }
-//    if (key == OF_KEY_UP){
-//        one->moveUp = false;
-//    }
-//    if (key == OF_KEY_DOWN){
-//        one->moveDown = false;
-//    }
 }

@@ -6,9 +6,14 @@
 //
 //
 
-#ifndef __spaceTimeAndBunnies__circleFrame__
-#define __spaceTimeAndBunnies__circleFrame__
+#include "ofMain.h"
 
-#include <stdio.h>
-
-#endif /* defined(__spaceTimeAndBunnies__circleFrame__) */
+class circleFrame{
+public:
+    circleFrame(float width);
+    void draw();
+    
+    float width;
+    
+    ofSpherePrimitive sphere;
+};

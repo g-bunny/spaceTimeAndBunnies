@@ -159,7 +159,7 @@ void Frame::draw(int perspectiveMode){
     this->perspectiveMode = perspectiveMode;
     ofPushMatrix();
     ofTranslate(marginX,marginY);
-    box.setPosition(0, 0,0);
+//    box.setPosition(0, 0,0);
     ofRotate(rotatey,0.0,1.0,0.0);
     ofRotate(rotatex,1.0,0.0,0.0);
     ofRotate(rotatez,0.0,0.0,1.0);

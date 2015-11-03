@@ -49,7 +49,6 @@ void Item:: drawClosed(){
 void Item:: drawChimney(){
     ofSetColor(255,255,255,255);
     chimney.draw(xPos, yPos, 158* scalingDown, 102* scalingDown);
-    
 }
 
 void Item:: drawSeconds(){

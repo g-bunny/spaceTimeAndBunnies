@@ -7,11 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		103251911BC84AEE00725CB7 /* Grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1032518F1BC84AEE00725CB7 /* Grid.cpp */; };
 		10334C6E1BAE87300049C48A /* Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10334C6C1BAE87300049C48A /* Item.cpp */; };
 		10334C711BAF3EDA0049C48A /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10334C6F1BAF3EDA0049C48A /* Camera.cpp */; };
+		105ADB171BC0CF3700A2E4A2 /* Chapter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 105ADB151BC0CF3700A2E4A2 /* Chapter.cpp */; };
+		108934FE1BE807D6004F2AE9 /* Clock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 108934FC1BE807D6004F2AE9 /* Clock.cpp */; };
+		108935011BE82583004F2AE9 /* Collectible.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 108934FF1BE82583004F2AE9 /* Collectible.cpp */; };
+		108935041BE838BD004F2AE9 /* circleFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 108935021BE838BD004F2AE9 /* circleFrame.cpp */; };
 		10A1096C1BB0ED6C00D1060E /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10A1096A1BB0ED6C00D1060E /* Timer.cpp */; };
 		10A1096F1BB1E0F200D1060E /* AIBehavior.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10A1096D1BB1E0F200D1060E /* AIBehavior.cpp */; };
 		10A109721BB27E4C00D1060E /* PlayerBehavior.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10A109701BB27E4C00D1060E /* PlayerBehavior.cpp */; };
+		10A109781BB3990F00D1060E /* CubeItems.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10A109761BB3990F00D1060E /* CubeItems.cpp */; };
 		10C6695E1BAE4F0200EBC7DE /* Characters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10C6695C1BAE4F0200EBC7DE /* Characters.cpp */; };
 		10C669611BAE4F4000EBC7DE /* Frame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10C6695F1BAE4F4000EBC7DE /* Frame.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
@@ -66,16 +72,28 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1032518F1BC84AEE00725CB7 /* Grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Grid.cpp; sourceTree = "<group>"; };
+		103251901BC84AEE00725CB7 /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
 		10334C6C1BAE87300049C48A /* Item.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Item.cpp; sourceTree = "<group>"; };
 		10334C6D1BAE87300049C48A /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		10334C6F1BAF3EDA0049C48A /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		10334C701BAF3EDA0049C48A /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		105ADB151BC0CF3700A2E4A2 /* Chapter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Chapter.cpp; sourceTree = "<group>"; };
+		105ADB161BC0CF3700A2E4A2 /* Chapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chapter.h; sourceTree = "<group>"; };
+		108934FC1BE807D6004F2AE9 /* Clock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Clock.cpp; sourceTree = "<group>"; };
+		108934FD1BE807D6004F2AE9 /* Clock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clock.h; sourceTree = "<group>"; };
+		108934FF1BE82583004F2AE9 /* Collectible.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Collectible.cpp; sourceTree = "<group>"; };
+		108935001BE82583004F2AE9 /* Collectible.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Collectible.h; sourceTree = "<group>"; };
+		108935021BE838BD004F2AE9 /* circleFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = circleFrame.cpp; sourceTree = "<group>"; };
+		108935031BE838BD004F2AE9 /* circleFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = circleFrame.h; sourceTree = "<group>"; };
 		10A1096A1BB0ED6C00D1060E /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
 		10A1096B1BB0ED6C00D1060E /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
 		10A1096D1BB1E0F200D1060E /* AIBehavior.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AIBehavior.cpp; sourceTree = "<group>"; };
 		10A1096E1BB1E0F200D1060E /* AIBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIBehavior.h; sourceTree = "<group>"; };
 		10A109701BB27E4C00D1060E /* PlayerBehavior.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerBehavior.cpp; sourceTree = "<group>"; };
 		10A109711BB27E4C00D1060E /* PlayerBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerBehavior.h; sourceTree = "<group>"; };
+		10A109761BB3990F00D1060E /* CubeItems.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CubeItems.cpp; sourceTree = "<group>"; };
+		10A109771BB3990F00D1060E /* CubeItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CubeItems.h; sourceTree = "<group>"; };
 		10C6695C1BAE4F0200EBC7DE /* Characters.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Characters.cpp; sourceTree = "<group>"; };
 		10C6695D1BAE4F0200EBC7DE /* Characters.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Characters.hpp; sourceTree = "<group>"; };
 		10C6695F1BAE4F4000EBC7DE /* Frame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Frame.cpp; sourceTree = "<group>"; };
@@ -212,12 +230,24 @@
 				10334C6D1BAE87300049C48A /* Item.h */,
 				10334C6F1BAF3EDA0049C48A /* Camera.cpp */,
 				10334C701BAF3EDA0049C48A /* Camera.h */,
+				108935021BE838BD004F2AE9 /* circleFrame.cpp */,
+				108935031BE838BD004F2AE9 /* circleFrame.h */,
 				10A1096A1BB0ED6C00D1060E /* Timer.cpp */,
 				10A1096B1BB0ED6C00D1060E /* Timer.h */,
 				10A1096D1BB1E0F200D1060E /* AIBehavior.cpp */,
 				10A1096E1BB1E0F200D1060E /* AIBehavior.h */,
+				108934FC1BE807D6004F2AE9 /* Clock.cpp */,
+				108934FD1BE807D6004F2AE9 /* Clock.h */,
+				108934FF1BE82583004F2AE9 /* Collectible.cpp */,
+				108935001BE82583004F2AE9 /* Collectible.h */,
+				105ADB151BC0CF3700A2E4A2 /* Chapter.cpp */,
+				105ADB161BC0CF3700A2E4A2 /* Chapter.h */,
 				10A109701BB27E4C00D1060E /* PlayerBehavior.cpp */,
 				10A109711BB27E4C00D1060E /* PlayerBehavior.h */,
+				1032518F1BC84AEE00725CB7 /* Grid.cpp */,
+				103251901BC84AEE00725CB7 /* Grid.h */,
+				10A109761BB3990F00D1060E /* CubeItems.cpp */,
+				10A109771BB3990F00D1060E /* CubeItems.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -321,12 +351,18 @@
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				10A1096F1BB1E0F200D1060E /* AIBehavior.cpp in Sources */,
 				10C669611BAE4F4000EBC7DE /* Frame.cpp in Sources */,
+				103251911BC84AEE00725CB7 /* Grid.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				10C6695E1BAE4F0200EBC7DE /* Characters.cpp in Sources */,
 				10334C711BAF3EDA0049C48A /* Camera.cpp in Sources */,
 				10A1096C1BB0ED6C00D1060E /* Timer.cpp in Sources */,
+				108934FE1BE807D6004F2AE9 /* Clock.cpp in Sources */,
+				105ADB171BC0CF3700A2E4A2 /* Chapter.cpp in Sources */,
+				10A109781BB3990F00D1060E /* CubeItems.cpp in Sources */,
 				10A109721BB27E4C00D1060E /* PlayerBehavior.cpp in Sources */,
+				108935011BE82583004F2AE9 /* Collectible.cpp in Sources */,
 				10334C6E1BAE87300049C48A /* Item.cpp in Sources */,
+				108935041BE838BD004F2AE9 /* circleFrame.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

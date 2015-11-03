@@ -11,7 +11,7 @@
 
 class Characters{
 public:
-    Characters(float x, float y, float z, int characterMode);
+    Characters(float x, float y, float z, int characterMode, int shapeMode);
     void display();
     void move();
     void jump();
@@ -65,6 +65,7 @@ public:
     bool transported = false;
     
     int characterMode;
+    int shapeMode; // 0 is rect, 1 is circle
     
     float currentYpos = startingYpos;
     
@@ -72,6 +73,8 @@ public:
     float jumpForce = -7;
     
     Timer * timer;
+    ofImage stationaryInCircle;
+    ofImage movingInCircle;
     
     // 0 = isZero & isPlayer, 1 = isOne & isPlayer, 2 = isZero & isAI, 3 = isOne & isAI
 };
