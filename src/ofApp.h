@@ -21,11 +21,13 @@ class ofApp : public ofBaseApp{
     Chapter * chapter2;
     Chapter * chapter3;
     Chapter * chapter7;
+    Chapter * chapter8;
     
     Characters * one;
     Characters * two;
     Characters * three;
     Characters * seven;
+    Characters * eight;
     Characters * zero;
     Characters * playableZero;
     
@@ -47,6 +49,8 @@ class ofApp : public ofBaseApp{
     Item * runes7;
 
     Timer * timer;
+    
+    Clock * UIClock;
     
     ofTrueTypeFont arcadeFont;
     ofTrueTypeFont visitorFont;
@@ -82,4 +86,10 @@ class ofApp : public ofBaseApp{
     
     ofShader shader;
     ofEasyCam cam;
+    
+    ofColor colorOne;
+    ofColor colorTwo;
+    float bgR1 = 255;
+    float bgG1 = 255, bgB1 = 255;
+    float bgR2 = 255, bgG2 = 255, bgB2 = 255;
 };

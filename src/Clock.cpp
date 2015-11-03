@@ -8,43 +8,57 @@
 
 #include "Clock.h"
 
+const ofColor lavender = ofColor(176,183,255);
+const ofColor blue = ofColor(178,255,233);
+const ofColor red = ofColor(242,105,105);
+
 Clock::Clock(int worldOrUI, int xPos, int yPos){
     this->worldOrUI = worldOrUI;
     this->xPos = xPos;
     this->yPos = yPos;
+    
+    startingHours = ofGetHours();
+    startingMins = ofGetMinutes();
+    startingSecs = ofGetSeconds();
 }
 
 void Clock:: drawSeconds(){
-    
-    secs = ofGetSeconds();
+    ofSetColor(red);
+    secs = ofGetElapsedTimef();
     ofPushMatrix();
     ofTranslate(xPos, yPos);
     rotationS = secs * 6;
     rotationS += movementFactorS;
     ofRotate(rotationS);
-    ofLine(0, -140, 0, 0);
+    ofLine(0, -20, 0, 0);
     ofPopMatrix();
+    cout<<"secs"<<secs<<endl;
 }
 
 void Clock:: drawMinutes(){
-    mins = ofGetMinutes();
+    ofSetColor(blue);
+    
+    mins = secs / 12;
+    if (floor(secs/60) ==1){
+        mins +=1;
+    }
     ofPushMatrix();
     ofTranslate(xPos, yPos);
-    rotationM = mins * 6;
+    rotationM = mins * 30;
     rotationM += movementFactorM;
     ofRotate(rotationM);
-    ofLine(0, -120, 0, 0);
+    ofLine(0, -15, 0, 0);
     ofPopMatrix();
     
 }
 void Clock::drawHours(){
-    hours = ofGetHours();
+    hours = ofGetHours() - startingHours;
     ofPushMatrix();
     ofTranslate(xPos, yPos);
     rotationH = hours * 30;
     rotationH += movementFactorH;
     ofRotate(rotationH);
-    ofLine(0, -100, 0, 0);
+    ofLine(0, -10, 0, 0);
     ofPopMatrix();
 }
 

@@ -16,7 +16,8 @@ public:
     void move();
     void jump();
     
-    
+    void circularMove();
+    void circularJump();
     float x, y, z;
     int maxImages = 8;
     int imageIndex = 0;
@@ -75,6 +76,10 @@ public:
     Timer * timer;
     ofImage stationaryInCircle;
     ofImage movingInCircle;
+    
+    float rotation = 0;
+    float moveForce;
+    float gravityForce;
     
     // 0 = isZero & isPlayer, 1 = isOne & isPlayer, 2 = isZero & isAI, 3 = isOne & isAI
 };

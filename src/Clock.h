@@ -20,6 +20,10 @@ public:
     int xPos;
     int yPos;
     
+    float startingMins;
+    float startingSecs;
+    float startingHours;
+    
     float hours;
     float mins;
     float secs;

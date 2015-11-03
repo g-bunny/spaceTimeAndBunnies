@@ -342,3 +342,28 @@ void Characters::jump(){
     }
     
 }
+
+void Characters::circularMove(){
+    if (moveRight){
+        rotation -= 10;
+    }
+    if (moveLeft){
+        rotation += 10;
+        moveRight = false;
+    }
+    if (rotation <= -90){
+        rotation += (5 * (-90 - rotation ));
+    }
+    ofPushMatrix();
+    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
+    ofSetColor(255,0,0);
+    ofEllipse(0,0,20,20);
+//    rotation = ofGetElapsedTimef()*10;
+    ofRotateZ(rotation); //+ moveForce + gravityForce);
+    stationaryInCircle.draw(location.x,location.y);
+    ofPopMatrix();
+    
+    cout<<"rotation: " << rotation << endl;
+    
+
+}

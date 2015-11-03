@@ -11,6 +11,7 @@ void ofApp::setup(){
     this->chapter1 = new Chapter(1, 1, 2,2,2,2, fullWidth,fullHeight,fullHeight,692.5,425, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0);
     this->chapter2 = new Chapter(2, 4, 1,1,1,1, 200,300,100,250,400, 200,300,100,550,400, 200,300,100,850,400, 200,300,100,1150,400);
     this->chapter3 = new Chapter(3, 2, 1,1,1,1,halfWidth + 125,fullHeight+100,fullHeight-300,400,425, halfWidth+125,fullHeight+100,fullHeight-300,975,425, 0,0,0,0,0, 0,0,0,0,0);
+    this->chapter8 = new Chapter(8,2,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
     
     this->sphere1 = new circleFrame(400);
     ofTrueTypeFont::setGlobalDpi(72);
@@ -19,11 +20,13 @@ void ofApp::setup(){
     chapter1->chapNum = 1;
     chapter2->chapNum = 2;
     chapter3->chapNum = 3;
+    chapter8->chapNum = 8;
     this->one = new Characters(350,525,0,1,0);
     this->two = new Characters(350,410,0,1,0);
     this->three = new Characters(350,525,0,1,0);
     this->seven = new Characters(350,285,0,1,0);
-    
+    //circular bunny movement
+    this->eight = new Characters(-170, 100, 0, 1, 1);
     this->zero = new Characters(990,570,0,2,0);
     this->playableZero = new Characters(1070, 400,0,0,0);
     this->timer = new Timer();
@@ -72,6 +75,8 @@ void ofApp::setup(){
     this->citySlope = new Item(5, 270, 370);
 
     this->runes1 = new Item(10, 260,300);
+    
+    this->UIClock = new Clock(1, ofGetWidth() - 30,  30);
 }
 
 //--------------------------------------------------------------
@@ -84,12 +89,40 @@ void ofApp::update(){
         chapter3->update();
     } else if (currentChapter == 7){
         chapter7->update();
+    } else if (currentChapter == 8){
+        chapter8->update();
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     
+    
+    colorOne.set(bgR1, bgG1, bgB1);
+    colorTwo.set(bgR2, bgG2, bgB2);
+    
+    
+//    UIClock->drawHours();
+    UIClock -> drawMinutes();
+    UIClock -> drawSeconds();
+    
+    if (abs(UIClock->secs) >= 30 && abs(UIClock->secs) < 45){
+        bgR1 = 255 - (UIClock->secs - 30) * 17;
+        bgG1 = 255 - (UIClock->secs - 30) * 17;
+//        bgB1 = 1 + (UIClock->secs - 30);
+//        bgR2 = 1 + (UIClock->secs - 30);
+        bgB2 = 255 - (UIClock->secs - 30) * 17;
+        bgG2 = 255 - (UIClock->secs - 30) * 17;
+        ofBackgroundGradient(colorOne, colorTwo, OF_GRADIENT_LINEAR);
+
+    } else if (abs(UIClock->secs) > 45 && (abs(UIClock->secs) <= 60)){
+        bgB1 = 255 - 255 * (UIClock->secs - 45)/15;
+        bgR2 = 255 - 255 * (UIClock ->secs - 45)/15;
+        bgR1 = bgG1 = bgG2 = bgB2 = 0;
+    }
+    else {
+        bgR1 = bgR2 = bgG1 = bgG2 = bgB1 = bgB2 = 255;
+    }
 //    grid->update();
     if (currentChapter == 1){
         chapter1->draw();
@@ -322,9 +355,6 @@ void ofApp::draw(){
             ofPopMatrix();
             ofPushMatrix();
             ofTranslate(0,0, 50);
-//            seven->display();
-//            seven->move();
-//            seven->jump();
         seven->displacementZ = 152;
         seven->display();
         seven->move();
@@ -333,11 +363,12 @@ void ofApp::draw(){
     }
     else if(currentChapter == 8){
 //        cam.begin();
-        shader.begin();
-        shader.setUniform2f("u_resolution", ofGetWidth(), ofGetHeight());
-        shader.setUniform1f("u_time", ofGetElapsedTimef());
-        sphere1->draw();
-        shader.end();
+//        shader.begin();
+//        shader.setUniform2f("u_resolution", ofGetWidth(), ofGetHeight());
+//        shader.setUniform1f("u_time", ofGetElapsedTimef());
+//        sphere1->draw();
+//        shader.end();
+        eight->circularMove();
 //        cam.end();
     }
 
@@ -382,30 +413,28 @@ void ofApp::draw(){
         
     }
 }
-
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     chapter7->keyPressed(key);
     chapter1->keyPressed(key);
     chapter2->keyPressed(key);
     chapter3->keyPressed(key);
+    chapter8->keyPressed(key);
     
         if (key == OF_KEY_RIGHT){
             one->moveRight = true;
             two->moveRight = true;
-
             three->moveRight = true;
             seven->moveRight = true;
-
+            eight->moveRight = true;
             playableZero->moveRight = true;
         }
         if (key == OF_KEY_LEFT){
             one->moveLeft = true;
             two->moveLeft = true;
             three->moveLeft = true;
-
             seven->moveLeft = true;
-
+            eight->moveLeft = true;
             playableZero->moveLeft = true;
 
         }
@@ -413,19 +442,17 @@ void ofApp::keyPressed(int key){
             one->moveUp = true;
             three->moveUp = true;
             two->moveUp = true;
-
             seven->moveUp = true;
-
+            eight->moveUp = true;
             playableZero->moveUp = true;
 
         }
         if (key == OF_KEY_DOWN){
             one->moveDown = true;
             two->moveDown = true;
-
             three->moveDown = true;
             seven->moveDown = true;
-
+            eight->moveDown = true;
             playableZero->moveDown = true;
 
         }
@@ -434,7 +461,7 @@ void ofApp::keyPressed(int key){
             three->jumped = true;
             two->jumped = true;
             seven->jumped = true;
-
+            eight->jumped = true;
             playableZero->jumped = true;
 
         }
@@ -452,20 +479,20 @@ void ofApp::keyPressed(int key){
         }
 
 }
-
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
     chapter1->keyReleased(key);
     chapter2->keyReleased(key);
     chapter3->keyReleased(key);
     chapter7->keyReleased(key);
+    chapter8->keyReleased(key);
     
     if (key == OF_KEY_RIGHT){
         one->moveRight = false;
         two->moveRight = false;
         three->moveRight = false;
         seven->moveRight = false;
-
+        eight->moveRight = false;
         playableZero->moveRight = false;
     }
     if (key == OF_KEY_LEFT){
@@ -473,6 +500,7 @@ void ofApp::keyReleased(int key){
         two->moveLeft = false;
         three->moveLeft = false;
         seven->moveLeft = false;
+        eight->moveLeft = false;
         playableZero->moveLeft = false;
     }
     if (key == OF_KEY_UP){
@@ -480,7 +508,7 @@ void ofApp::keyReleased(int key){
         two->moveUp = false;
         three->moveUp = false;
         seven->moveUp = false;
-
+        eight->moveUp = false;
         playableZero->moveUp = false;
     }
     if (key == OF_KEY_DOWN){
@@ -488,6 +516,7 @@ void ofApp::keyReleased(int key){
         three->moveDown = false;
         two->moveDown = false;
         seven->moveDown = false;
+        eight->moveDown = false;
         playableZero->moveDown = false;
     }
 
@@ -503,26 +532,7 @@ void ofApp::keyReleased(int key){
         currentChapter = 8;
     }
 }
-////--------------------------------------------------------------
-//void ofApp::mouseMoved(int x, int y ){
-//}
-////--------------------------------------------------------------
-//void ofApp::mouseDragged(int x, int y, int button){
-//}
-////--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
 }
-////--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-//    currentChapter+=1;
 }
-////--------------------------------------------------------------
-//void ofApp::windowResized(int w, int h){
-//}
-////--------------------------------------------------------------
-//void ofApp::gotMessage(ofMessage msg){
-//}
-////--------------------------------------------------------------
-//void ofApp::dragEvent(ofDragInfo dragInfo){ 
-//}
