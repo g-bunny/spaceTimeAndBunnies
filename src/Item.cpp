@@ -28,6 +28,15 @@ Item:: Item(int itemType, int xPos, int yPos){
     runes5.loadImage("5.1.png");
     runes6.loadImage("6.1.png");
     runes7.loadImage("7.1.png");
+    
+    cantthink1.loadImage("icantthink_blank.png");
+    cantthink2.loadImage("icantthink_stage1.png");
+    cantthink3.loadImage("icantthink_stage2.png");
+    walkTo0.loadImage("walkToNextFrame0.png");
+    walkTo1.loadImage("walkToNextFrame1.png");
+    walkTo2.loadImage("walkToNextFrame2.png");
+    walkTo3.loadImage("walkToNextFrame3.png");
+
 }
 
 void Item:: drawOpen(){
@@ -140,7 +149,34 @@ void Item::drawRunes(){
     if(showRune7){
     runes7.draw(xPos + 750, yPos, 120, 201);
     }
+}
 
-//    runes2.draw();
+void Item::drawCantthink(){
+    ofSetColor(255,255,255,255);
+    if(thinkStage ==1){
+        cantthink1.draw(xPos, yPos);
+    } else if(thinkStage ==2){
+        cantthink2.draw(xPos, yPos);
+    } else if (thinkStage ==3){
+        cantthink3.draw(xPos, yPos);
+    }
+}
+void Item::drawWalkTo(){
+    ofSetColor(255,255,255,255);
+    if(walkToStage ==0){
+        walkTo0.draw(xPos, yPos, 1991, 512);
+    } else if(walkToStage ==1){
+        walkTo1.draw(xPos, yPos, 1991, 512);
+    } else if (walkToStage ==2){
+        walkTo2.draw(xPos, yPos, 1991, 512);
+    } else if(walkToStage ==3){
+        walkTo3.draw(xPos, yPos, 1991, 512);
+    }
     
+    if (idle == false){
+        if (walkToStage ==0){
+            walkToStage = 1;
+        }
+    }
+    cout << "idle: " << idle << endl;
 }

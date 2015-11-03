@@ -23,6 +23,8 @@ public:
     void drawCity();
     void drawCitySlope();
     void drawRunes();
+    void drawCantthink();
+    void drawWalkTo();
     //0 - cube type; 1 - collectible type; 2 - interaction type; 3 - noCollider type; 4 - collider type
     int itemType;
     
@@ -60,6 +62,16 @@ public:
     ofImage runes6;
     ofImage runes7;
     
+    ofImage cantthink1;
+    ofImage cantthink2;
+    ofImage cantthink3;
+    
+    ofImage walkTo0;
+    ofImage walkTo1;
+    ofImage walkTo2;
+    ofImage walkTo3;
+    
+    
     float scalingDown = .75;
     
     float shake;
@@ -73,5 +85,12 @@ public:
     bool showRune5 = false;
     bool showRune6 = false;
     bool showRune7 = false;
+    
+    int thinkStage = 1;
+    
+    int walkToStage = 0;
+    
+    bool idle = true;
+    
     
 };

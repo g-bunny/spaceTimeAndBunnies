@@ -17,11 +17,13 @@ class ofApp : public ofBaseApp{
         void keyPressed(int key);
         void keyReleased(int key);
 
+    Chapter * chapter0;
     Chapter * chapter1;
     Chapter * chapter2;
     Chapter * chapter3;
     Chapter * chapter7;
     Chapter * chapter8;
+    Chapter * chapter9;
     
     Characters * one;
     Characters * two;
@@ -30,6 +32,8 @@ class ofApp : public ofBaseApp{
     Characters * eight;
     Characters * zero;
     Characters * playableZero;
+    Characters * zerozero;
+    Characters * nine;
     
     Grid * grid;
     
@@ -47,7 +51,10 @@ class ofApp : public ofBaseApp{
     Item * runes5;
     Item * runes6;
     Item * runes7;
-
+    
+    Item * walkToChapter;
+    Item * cantThinkChapter;
+    
     Timer * timer;
     
     Clock * UIClock;
@@ -56,7 +63,7 @@ class ofApp : public ofBaseApp{
     ofTrueTypeFont visitorFont;
     ofTrueTypeFont superScriptFont;
     ofTrueTypeFont handyFont;
-    int currentChapter = 1;
+    int currentChapter = 0;
     
     int widthThirds = 300;
     int widthHalves;

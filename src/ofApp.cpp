@@ -6,27 +6,33 @@ void ofApp::setup(){
     ofEnableDepthTest();
     shader.load("", "random1.frag");
     
+    this->chapter0 = new Chapter(0,2,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 //    this->chapter1 = new Chapter1();
     this->chapter7 = new Chapter(7, 4, 1,1,1,2, 300,300,100,275,250, 300,300,300,687.5,250, 300,300,100,1100,250, 1125,300,100,687.5,625);
     this->chapter1 = new Chapter(1, 1, 2,2,2,2, fullWidth,fullHeight,fullHeight,692.5,425, 0,0,0,0,0, 0,0,0,0,0, 0,0,0,0,0);
     this->chapter2 = new Chapter(2, 4, 1,1,1,1, 200,300,100,250,400, 200,300,100,550,400, 200,300,100,850,400, 200,300,100,1150,400);
     this->chapter3 = new Chapter(3, 2, 1,1,1,1,halfWidth + 125,fullHeight+100,fullHeight-300,400,425, halfWidth+125,fullHeight+100,fullHeight-300,975,425, 0,0,0,0,0, 0,0,0,0,0);
     this->chapter8 = new Chapter(8,2,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+    this->chapter9 = new Chapter(9,2,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
     
     this->sphere1 = new circleFrame(400);
     ofTrueTypeFont::setGlobalDpi(72);
     fileName = "screen1.png";
     chapter7->chapNum = 7;
+    chapter0->chapNum = 0;
     chapter1->chapNum = 1;
     chapter2->chapNum = 2;
     chapter3->chapNum = 3;
     chapter8->chapNum = 8;
+    chapter9->chapNum = 9;
+    this->zerozero = new Characters(390,460,0,0,0);
     this->one = new Characters(350,525,0,1,0);
     this->two = new Characters(350,410,0,1,0);
     this->three = new Characters(350,525,0,1,0);
     this->seven = new Characters(350,285,0,1,0);
     //circular bunny movement
     this->eight = new Characters(-170, 100, 0, 1, 1);
+    this->nine = new Characters(600,400,0,1,0);
     this->zero = new Characters(990,570,0,2,0);
     this->playableZero = new Characters(1070, 400,0,0,0);
     this->timer = new Timer();
@@ -34,48 +40,15 @@ void ofApp::setup(){
     arcadeFont.loadFont("fonts/arcade/ARCADE.TTF", 24);
     arcadeFont.setLineHeight(20.0f);
     arcadeFont.setLetterSpacing(1.0);
-//    chapter7->frameWidth2 = 300;
-//    chapter7->frameHeight2 = 300;
-//    chapter7->frameWidth3 = 300;
-//    chapter7->frameHeight3 = 300;
-//    chapter7->frameDepth2 = 300;
-//    chapter7->frameDepth3 = 100;
-//    chapter7->frameWidth4 = 1125;
-//    chapter7->frameHeight4 = 300;
-//    chapter7->frameDepth4 = 100;
-//    chapter7->marginX2 = 687.5;
-//    chapter7->marginY2 = 250;
-//    chapter7->marginX3 = 1100;
-//    chapter7->marginY3 = 250;
-//    chapter7->marginX4 = 687.5;
-//    chapter7->marginY4 = 625;
-//    
-//    chapter3->frameWidth2 = 300;
-//    chapter3->frameHeight2 = 300;
-//    chapter3->frameWidth3 = 300;
-//    chapter3->frameHeight3 = 300;
-//    chapter3->frameDepth2 = 300;
-//    chapter3->frameDepth3 = 100;
-//    chapter3->marginX2 = 687.5;
-//    chapter3->marginY2 = 250;
-//    chapter3->marginX3 = 1100;
-//    chapter3->marginY3 = 250;
-//    
-//    
-//    chapter2->frameWidth2 = 100;
-//    chapter2->frameHeight2 = 100;
-//    chapter2->frameDepth2 = 10;
-//    chapter2->marginX2 = 300;
-//    chapter2->marginY2 = 100;
     this->brickChimney = new Item(2, 980, 327);
     this->door = new Item(2,980,526);
     this->clock = new Item(3, 690,250);
     this->homeSign = new Item(2,825,350);
     this->cityScape = new Item(4, 270, 370);
     this->citySlope = new Item(5, 270, 370);
-
     this->runes1 = new Item(10, 260,300);
-    
+    this->cantThinkChapter = new Item(2, 100, 0);
+    this->walkToChapter = new Item(2, 0, 200);
     this->UIClock = new Clock(1, ofGetWidth() - 30,  30);
 }
 
@@ -371,6 +344,42 @@ void ofApp::draw(){
         eight->circularMove();
 //        cam.end();
     }
+    else if(currentChapter == 9){
+        cantThinkChapter->drawCantthink();
+        ofPushMatrix();
+        ofTranslate(0,0,500);
+        nine->display();
+        nine->move();
+        nine->jump();
+        ofPopMatrix();
+        
+        if(nine->location.x >= 700){
+            cantThinkChapter->thinkStage = 2;
+        } else if(nine ->location.x <= 550){
+            cantThinkChapter->thinkStage = 3;
+        }
+    }
+    else if(currentChapter ==0){
+        walkToChapter->drawWalkTo();
+        ofPushMatrix();
+        
+        if (walkToChapter->idle == false){
+            if(ofGetSeconds() % 3 == 1){
+                walkToChapter->walkToStage = 1;
+            } else if(ofGetSeconds()%4 ==1){
+                walkToChapter->walkToStage = 2;
+            }
+            if (zerozero->location.x >= 920){
+                walkToChapter->walkToStage = 3;
+            }
+        ofTranslate(0,0,240);
+        }
+
+        zerozero->display();
+        zerozero->move();
+        ofPopMatrix();
+//        one->jump();
+    }
 
     
     ofSetColor(0);
@@ -420,6 +429,8 @@ void ofApp::keyPressed(int key){
     chapter2->keyPressed(key);
     chapter3->keyPressed(key);
     chapter8->keyPressed(key);
+    chapter9->keyPressed(key);
+    chapter0->keyPressed(key);
     
         if (key == OF_KEY_RIGHT){
             one->moveRight = true;
@@ -428,6 +439,9 @@ void ofApp::keyPressed(int key){
             seven->moveRight = true;
             eight->moveRight = true;
             playableZero->moveRight = true;
+            zerozero->moveRight = true;
+            nine->moveRight = true;
+
         }
         if (key == OF_KEY_LEFT){
             one->moveLeft = true;
@@ -436,6 +450,8 @@ void ofApp::keyPressed(int key){
             seven->moveLeft = true;
             eight->moveLeft = true;
             playableZero->moveLeft = true;
+            zerozero->moveLeft= true;
+            nine->moveLeft = true;
 
         }
         if (key == OF_KEY_UP){
@@ -477,6 +493,9 @@ void ofApp::keyPressed(int key){
                 door->interactionInitiated = false;
             }
         }
+//    if(walkToChapter->walkToStage ==0){
+        walkToChapter->idle = false;
+//    }
 
 }
 //--------------------------------------------------------------
@@ -486,14 +505,18 @@ void ofApp::keyReleased(int key){
     chapter3->keyReleased(key);
     chapter7->keyReleased(key);
     chapter8->keyReleased(key);
+    chapter9->keyReleased(key);
+    chapter0->keyReleased(key);
     
     if (key == OF_KEY_RIGHT){
         one->moveRight = false;
         two->moveRight = false;
         three->moveRight = false;
+        nine->moveRight = false;
         seven->moveRight = false;
         eight->moveRight = false;
         playableZero->moveRight = false;
+        zerozero->moveRight = false;
     }
     if (key == OF_KEY_LEFT){
         one->moveLeft = false;
@@ -502,6 +525,9 @@ void ofApp::keyReleased(int key){
         seven->moveLeft = false;
         eight->moveLeft = false;
         playableZero->moveLeft = false;
+        zerozero->moveLeft = false;
+        nine->moveLeft = false;
+
     }
     if (key == OF_KEY_UP){
         one->moveUp = false;
@@ -530,6 +556,10 @@ void ofApp::keyReleased(int key){
         currentChapter = 7;
     } else if (key == '8'){
         currentChapter = 8;
+    }else if (key == '9'){
+        currentChapter = 9;
+    }else if (key == '0'){
+        currentChapter = 0;
     }
 }
 void ofApp::mousePressed(int x, int y, int button){
